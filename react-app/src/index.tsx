@@ -9,7 +9,7 @@ import { AuthProvider } from "@asgardeo/auth-react";
 const authConfig = {
   signInRedirectURL: "http://localhost:3000/",
   signOutRedirectURL: "http://localhost:3000/",
-  clientID: "9UylrhR4OafUeXdvpBV6tbK37aUa",
+  clientID: "SvEFbs1fqcFmk9485LPUZXijwzAa",
   baseUrl: "https://api.asgardeo.io/t/demoltda",
   scope: ["openid", "profile"],
 };
