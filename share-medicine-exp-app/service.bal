@@ -52,7 +52,7 @@ service / on new http:Listener(9090) {
         return r;
     }
 
-    resource function get medicines(@http:Header {name: "Authorization"} string token) returns Medicine[]|error? {
+    resource function get medicines(string token) returns Medicine[]|error? {
         log:printInfo("Token: "+token);
         map<string|string> headers={
             "Authorization": token
