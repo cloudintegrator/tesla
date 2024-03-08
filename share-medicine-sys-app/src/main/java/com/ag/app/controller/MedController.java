@@ -1,4 +1,4 @@
-package com.anupam.controller;
+package com.ag.app.controller;
 
 import com.ag.app.service.MedDataService;
 import org.springframework.beans.factory.annotation.Autowired;

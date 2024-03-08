@@ -1,4 +1,4 @@
-package com.anupam.entity;
+package com.ag.app.entity;
 
 import jakarta.persistence.*;
 

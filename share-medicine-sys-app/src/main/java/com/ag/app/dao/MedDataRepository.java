@@ -1,4 +1,4 @@
-package com.anupam.dao;
+package com.ag.app.dao;
 
 import com.ag.app.entity.MedDataEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
