@@ -30,10 +30,10 @@ service / on new http:Listener(9090) {
         log:printInfo("********** Service Initialized **********");
     }
 
-    resource function get health(@http:Header {name: "Authorization"} string token) returns Response|error{
+    resource function get health(@http:Header {name: "authorization"} string authorization) returns Response|error{
         Response r={
-            status: 201,
-            message: token
+            status: 200,
+            message: authorization
         };
         return r;
     }
