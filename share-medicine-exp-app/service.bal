@@ -33,7 +33,7 @@ service / on new http:Listener(9090) {
     resource function get health() returns Response|error{
         Response r={
             status: 200,
-            message: token
+            message: "Up & Running."
         };
         return r;
     }
