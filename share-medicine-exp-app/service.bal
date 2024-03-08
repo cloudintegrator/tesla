@@ -30,7 +30,7 @@ service / on new http:Listener(9090) {
         log:printInfo("********** Service Initialized **********");
     }
 
-    resource function get health(string token) returns Response|error{
+    resource function get health() returns Response|error{
         Response r={
             status: 200,
             message: token
@@ -55,7 +55,7 @@ service / on new http:Listener(9090) {
     resource function get medicines(string token) returns Medicine[]|error? {
         log:printInfo("Token: "+token);
         map<string|string> headers={
-            "Authorization": token
+            "Authorization": "Bearer " + token
         };
         http:Client httpClient = check new ("https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev");
         Medicine[] med=check httpClient-> get("/fwzo/sharemedicinesysapp/health-5c6/v1.0/medicines",headers);
