@@ -1,0 +1,13 @@
+cloudamqp:
+  host: "fish-01.rmq.cloudamqp.com"
+  port: "5672"
+  username: "aannimrm"
+  password: "B40g83-bYXRfan3MSsyi1DuQzvH_Nves"
+  virtualhost: "aannimrm"
+
+spring:
+  datasource:
+    url: "jdbc:mysql://mysql-3133c145-tesla.a.aivencloud.com:18801/defaultdb"
+    driver: "com.mysql.cj.jdbc.Driver"
+    username: "avnadmin"
+    password: "AVNS_8EXQIdtLOu0IeqIM8My"
