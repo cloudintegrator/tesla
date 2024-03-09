@@ -20,7 +20,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
   const [token, setToken] = useState("");
-  const [medicines,setMedicines] = useState<Medicine[] | null>(null);
+  const [medicines, setMedicines] = useState<Medicine[] | null>(null);
 
   useEffect(() => {
     async function signInCheck() {
@@ -55,14 +55,16 @@ function App() {
     if (flag) {
       setIsLoading(true);
       const accessToken = await getAccessToken();
-      gm(accessToken).then((res) => {
-        let data = res.data;
-        setMedicines(data);
-        console.log(data);
-        setIsLoading(false);
-      }).catch((e)=>{
-        getMedicines();
-      });
+      gm(accessToken)
+        .then((res) => {
+          let data = res.data;
+          setMedicines(data);
+          console.log(data);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          getMedicines();
+        });
     }
   }
 
@@ -102,7 +104,20 @@ function App() {
         <div>
           <h1>Medicines</h1>
           {medicines && (
-            <h1>Test</h1>
+            <div>
+              <table>
+                <thead>
+                  <tr>
+                    {Object.keys(medicines[0]).map((header) => (
+                      <th key={header}>{header}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+            </div>
           )}
         </div>
       </div>
