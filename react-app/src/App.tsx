@@ -3,6 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
+import { Medicine } from "./api/types/medicine";
 
 function App() {
   const {
@@ -19,6 +20,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
   const [token, setToken] = useState("");
+  const [medicines,setMedicines] = useState<Medicine[] | null>(null);
 
   useEffect(() => {
     async function signInCheck() {
@@ -49,14 +51,17 @@ function App() {
   }
 
   async function getMedicines() {
-    const flag= await isAuthenticated();
+    const flag = await isAuthenticated();
     if (flag) {
       setIsLoading(true);
       const accessToken = await getAccessToken();
       gm(accessToken).then((res) => {
-        let data=res.data;
+        let data = res.data;
+        setMedicines(data);
         console.log(data);
         setIsLoading(false);
+      }).catch((e)=>{
+        getMedicines();
       });
     }
   }
@@ -82,17 +87,27 @@ function App() {
             <p>Unlock health: Share your unused meds.</p>
           </h1>
           <img src={logo} className="App-logo" alt="logo" />
-          <button className="button" onClick={handleSignIn}>Login</button>
+          <button className="button" onClick={handleSignIn}>
+            Login
+          </button>
         </header>
       </div>
     );
+  } else {
+    return (
+      <div className="App">
+        <h1>Logged in: {user?.orgName}</h1>
+        <h1>Token: {token}</h1>
+
+        <div>
+          <h1>Medicines</h1>
+          {medicines && (
+            <h1>Test</h1>
+          )}
+        </div>
+      </div>
+    );
   }
-  return (
-    <div className="App">
-      <h1>Logged in: {user?.username}</h1>
-      <h1>Token: {token}</h1>
-    </div>
-  );
 }
 
 export default App;
