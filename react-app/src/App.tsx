@@ -76,6 +76,11 @@ function App() {
         console.log(e);
       });
   };
+
+  const handleAcquire=(id)=>{
+    alert("I want"+id);
+  }
+
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
   }
@@ -114,6 +119,7 @@ function App() {
                     <th>Medicine Name</th>
                     <th>Quantity</th>
                     <th>Validity</th>
+                    <th>Acquire</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -125,6 +131,9 @@ function App() {
                       <td>{obj.medicine_name}</td>
                       <td>{obj.medicine_qty}</td>
                       <td>{obj.medicine_validity?.toString()}</td>
+                      <td>
+                        <button className="button" onClick={()=>handleAcquire(obj.id)}>I Want</button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
