@@ -47,7 +47,6 @@ function App() {
     const token = await getAccessToken();
     setToken(token);
     setUser(userResponse);
-    setIsLoading(false);
   }
 
   async function getMedicines() {
@@ -95,12 +94,13 @@ function App() {
         </header>
       </div>
     );
+  } else if (isLoading) {
+    return <div className="loader"></div>;
   } else {
     return (
       <div className="App">
         <h1>Logged in: {user?.displayName}</h1>
         {/* <h1>Token: {token}</h1> */}
-        <div className="loader"></div>
         <div>
           <button className="button">Share Medicine</button>
           {medicines && (
