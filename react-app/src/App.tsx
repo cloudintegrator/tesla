@@ -100,7 +100,7 @@ function App() {
       <div className="App">
         <h1>Logged in: {user?.displayName}</h1>
         {/* <h1>Token: {token}</h1> */}
-
+        <div className="loader"></div>
         <div>
           <button className="button">Share Medicine</button>
           {medicines && (
