@@ -102,7 +102,7 @@ function App() {
         {/* <h1>Token: {token}</h1> */}
 
         <div>
-          <h1>Medicines</h1>
+          <button className="button">Share Medicine</button>
           {medicines && (
             <div>
               <table className="container">
