@@ -114,7 +114,18 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  
+                  {
+                    medicines.map((obj,idx)=>(
+                      <tr key={idx}>
+                        <td>{obj.id}</td>
+                        <td>{obj.email}</td>
+                        <td>{obj.created?.toString()}</td>
+                        <td>{obj.medicine_name}</td>
+                        <td>{obj.medicine_qty}</td>
+                        <td>{obj.medicine_validity?.toString()}</td>
+                      </tr>
+                    ))
+                  }
                 </tbody>
               </table>
             </div>
