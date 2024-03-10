@@ -98,34 +98,35 @@ function App() {
   } else {
     return (
       <div className="App">
-        <h1>Logged in: {user?.orgName}</h1>
-        <h1>Token: {token}</h1>
+        <h1>Logged in: {user?.displayName}</h1>
+        {/* <h1>Token: {token}</h1> */}
 
         <div>
           <h1>Medicines</h1>
           {medicines && (
             <div>
-              <table>
+              <table className="container">
                 <thead>
                   <tr>
-                    {Object.keys(medicines[0]).map((header) => (
-                      <th key={header}>{header}</th>
-                    ))}
+                    <th>ID</th>
+                    <th>Published By</th>
+                    <th>Published On</th>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Validity</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {
-                    medicines.map((obj,idx)=>(
-                      <tr key={idx}>
-                        <td>{obj.id}</td>
-                        <td>{obj.email}</td>
-                        <td>{obj.created?.toString()}</td>
-                        <td>{obj.medicine_name}</td>
-                        <td>{obj.medicine_qty}</td>
-                        <td>{obj.medicine_validity?.toString()}</td>
-                      </tr>
-                    ))
-                  }
+                  {medicines.map((obj, idx) => (
+                    <tr key={idx}>
+                      <td>{obj.id}</td>
+                      <td>{obj.email}</td>
+                      <td>{obj.created?.toString()}</td>
+                      <td>{obj.medicine_name}</td>
+                      <td>{obj.medicine_qty}</td>
+                      <td>{obj.medicine_validity?.toString()}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
