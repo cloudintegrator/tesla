@@ -77,9 +77,9 @@ function App() {
       });
   };
 
-  const handleAcquire=(id)=>{
-    alert("I want"+id);
-  }
+  const handleAcquire = (id) => {
+    alert("I want" + id);
+  };
 
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
@@ -100,7 +100,12 @@ function App() {
       </div>
     );
   } else if (isLoading) {
-    return <div className="loader"></div>;
+    return (
+      <div>
+        <h1>Loading data...</h1>
+        <div className="loader"></div>
+      </div>
+    );
   } else {
     return (
       <div className="App">
@@ -132,7 +137,12 @@ function App() {
                       <td>{obj.medicine_qty}</td>
                       <td>{obj.medicine_validity?.toString()}</td>
                       <td>
-                        <button className="button" onClick={()=>handleAcquire(obj.id)}>I Want</button>
+                        <button
+                          className="button"
+                          onClick={() => handleAcquire(obj.id)}
+                        >
+                          I Want
+                        </button>
                       </td>
                     </tr>
                   ))}
