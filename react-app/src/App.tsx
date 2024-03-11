@@ -24,7 +24,8 @@ function App() {
   const [token, setToken] = useState("");
   const [medicines, setMedicines] = useState<Medicine[] | null>(null);
   const [seenAddMedPopup, setSeenAddMedPopup] = useState(false);
-
+  const [seenPickMedPopup, setSeenPickMedPopup] = useState(false);
+  const [selectedMed, setSelectedMed] = useState<Medicine | null>(null);
   useEffect(() => {
     async function signInCheck() {
       setIsAuthLoading(true);
@@ -83,10 +84,25 @@ function App() {
   function toggleAddMedicinePopup() {
     setSeenAddMedPopup(!seenAddMedPopup);
   }
+  function togglePickMedicinePopup(med) {
+    console.log(med.id);
+    setSelectedMed(med);
+    setSeenPickMedPopup(!seenPickMedPopup);
+  }
 
-  const handleAcquire = (id) => {
-    alert("I want" + id);
-  };
+  function PickMedicinePopup(props) {
+    async function handleButton(e) {
+      console.log(selectedMed);
+      props.toggle();
+    }
+    return (
+      <div>
+        <button className="button" onClick={handleButton}>
+          Close
+        </button>
+      </div>
+    );
+  }
 
   function ShareMedicinePopup(props) {
     async function handleShareMedicine(e) {
@@ -226,12 +242,19 @@ function App() {
                       <td>{obj.medicine_qty}</td>
                       <td>{obj.medicine_validity?.toString()}</td>
                       <td>
-                        <button
-                          className="button"
-                          onClick={() => handleAcquire(obj.id)}
-                        >
-                          Pick
-                        </button>
+                        {!seenPickMedPopup ? (
+                          <button
+                            className="button"
+                            onClick={() => togglePickMedicinePopup(obj)}
+                          >
+                            Pick
+                          </button>
+                        ) : null}
+                        {seenPickMedPopup ? (
+                          <PickMedicinePopup
+                            toggle={() => togglePickMedicinePopup(obj)}
+                          />
+                        ) : null}
                       </td>
                     </tr>
                   ))}
