@@ -230,7 +230,7 @@ function App() {
                           className="button"
                           onClick={() => handleAcquire(obj.id)}
                         >
-                          I Want
+                          Pick
                         </button>
                       </td>
                     </tr>
