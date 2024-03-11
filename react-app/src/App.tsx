@@ -5,6 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
 import { postMedicine } from "./api/medicines/post-medicines";
+import { get } from "http";
 
 function App() {
   const {
@@ -100,11 +101,10 @@ function App() {
         "medicine_validity"
       ) as HTMLInputElement;
 
-
-      let created_date=new Date();
-      let created_date_day=addLeadingZero(created_date.getDate());
-      let created_date_month=addLeadingZero(created_date.getMonth());
-      let created_date_year=created_date.getFullYear();
+      let created_date = new Date();
+      let created_date_day = addLeadingZero(created_date.getDate());
+      let created_date_month = addLeadingZero(created_date.getMonth());
+      let created_date_year = created_date.getFullYear();
 
       let x = new Date(medicine_validity.value);
       let m = addLeadingZero(x.getMonth());
@@ -113,7 +113,8 @@ function App() {
 
       const med: Medicine = {
         email: user?.username,
-        created: created_date_year+"-"+created_date_month+"-"+created_date_day,
+        created:
+          created_date_year + "-" + created_date_month + "-" + created_date_day,
         medicine_name: medicine_name.value,
         medicine_qty: Number(medicine_qty.value),
         medicine_validity: y + "-" + m + "-" + d,
@@ -126,6 +127,9 @@ function App() {
         })
         .catch((e) => {
           console.log(e);
+        })
+        .finally(() => {
+          getMedicines();
         });
     }
     function addLeadingZero(n) {
@@ -145,7 +149,7 @@ function App() {
           <input
             className="share-medicine-popup-input"
             id="medicine_qty"
-            type="text"
+            type="number"
           />
           <label className="share-medicine-popup-label">Expiry Date</label>
           <input
