@@ -92,7 +92,7 @@ function App() {
             <label className="share-medicine-popup-label">Quantity</label>
             <input className="share-medicine-popup-input" type="text" />
             <label className="share-medicine-popup-label">Expiry Date</label>
-            <input className="share-medicine-popup-input" type="text" />
+            <input className="share-medicine-popup-input" type="date" />
             <button className="button">Add</button>
           </form>
         </div>
