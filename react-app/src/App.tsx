@@ -92,8 +92,16 @@ function App() {
       e.preventDefault();
       const medicine_name = document.getElementById("medicine_name") as HTMLInputElement;
       const medicine_qty = document.getElementById("medicine_qty") as HTMLInputElement;
+      const medicine_validity=document.getElementById("medicine_validity") as HTMLInputElement;
+
+      const med: Medicine={
+        email: user?.email,
+        medicine_name: medicine_name.value,
+        medicine_qty:Number(medicine_qty.value),
+        medicine_validity:new Date(medicine_validity.value)
+      };
       props.toggle();
-      console.log(medicine_name.value);
+      console.log(medicine_validity.value);
     }
     return (
       <div className="share-medicine-popup-div">
