@@ -189,3 +189,22 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+.share-medicine-popup-div{
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+}
+.share-medicine-popup-input{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.share-medicine-popup-label{
+  color: black;
+  
+}

@@ -85,23 +85,15 @@ function App() {
   function ShareMedicinePopup() {
     return (
       <Popup trigger={<button className="button">Share Medicine</button>}>
-        <div>
+        <div className="share-medicine-popup-div">
           <form>
-            <label>Name of Medicine </label>
-            <br></br>
-            <input type="text" />
-            <br></br>
-            <label>Name of Medicine </label>
-            <br></br>
-            <input type="text" />
-            <br></br>
-            <label>Name of Medicine </label>
-            <br></br>
-            <input type="text" />
-            <br></br>
-            <label>Name of Medicine </label>
-            <br></br>
-            <input type="text" />
+            <label className="share-medicine-popup-label">Medicine</label>
+            <input className="share-medicine-popup-input" type="text" />
+            <label className="share-medicine-popup-label">Quantity</label>
+            <input className="share-medicine-popup-input" type="text" />
+            <label className="share-medicine-popup-label">Expiry Date</label>
+            <input className="share-medicine-popup-input" type="text" />
+            <button className="button">Add</button>
           </form>
         </div>
       </Popup>
@@ -140,7 +132,7 @@ function App() {
         {/* <h1>Token: {token}</h1> */}
         <div>
           {/* <button className="button">Share Medicine</button> */}
-          <ShareMedicinePopup/>
+          <ShareMedicinePopup />
           {medicines && (
             <div>
               <table className="container">
