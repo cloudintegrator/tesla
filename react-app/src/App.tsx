@@ -22,6 +22,7 @@ function App() {
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
   const [token, setToken] = useState("");
   const [medicines, setMedicines] = useState<Medicine[] | null>(null);
+  const [seenAddMedPopup, setSeenAddMedPopup] = useState(false)
 
   useEffect(() => {
     async function signInCheck() {
@@ -78,28 +79,52 @@ function App() {
       });
   };
 
+  function toggleAddMedicinePopup(){
+    setSeenAddMedPopup(!seenAddMedPopup);
+  }
+
   const handleAcquire = (id) => {
     alert("I want" + id);
   };
 
-  function ShareMedicinePopup() {
+  function ShareMedicinePopup(props) {
+    function handleShareMedicine(e) {
+      e.preventDefault();
+      const medicine_name = document.getElementById("medicine_name") as HTMLInputElement;
+      const medicine_qty = document.getElementById("medicine_qty") as HTMLInputElement;
+      props.toggle();
+      console.log(medicine_name.value);
+    }
     return (
-      <Popup trigger={<button className="button">Share Medicine</button>}>
-        <div className="share-medicine-popup-div">
-          <form>
-            <label className="share-medicine-popup-label">Medicine</label>
-            <input className="share-medicine-popup-input" type="text" />
-            <label className="share-medicine-popup-label">Quantity</label>
-            <input className="share-medicine-popup-input" type="text" />
-            <label className="share-medicine-popup-label">Expiry Date</label>
-            <input className="share-medicine-popup-input" type="date" />
-            <button className="button">Add</button>
-          </form>
-        </div>
-      </Popup>
+      <div className="share-medicine-popup-div">
+        <form id="add_med_form" onSubmit={handleShareMedicine}>
+          <label className="share-medicine-popup-label">Medicine</label>
+          <input
+            className="share-medicine-popup-input"
+            id="medicine_name"
+            type="text"
+          />
+          <label className="share-medicine-popup-label">Quantity</label>
+          <input
+            className="share-medicine-popup-input"
+            id="medicine_qty"
+            type="text"
+          />
+          <label className="share-medicine-popup-label">Expiry Date</label>
+          <input
+            className="share-medicine-popup-input"
+            id="medicine_validity"
+            type="date"
+          />
+          <button className="button" type="submit">
+            Add
+          </button>
+        </form>
+      </div>
     );
   }
 
+ 
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
   }
@@ -131,8 +156,8 @@ function App() {
         <h1>Logged in: {user?.displayName}</h1>
         {/* <h1>Token: {token}</h1> */}
         <div>
-          {/* <button className="button">Share Medicine</button> */}
-          <ShareMedicinePopup />
+          <button className="button" onClick={toggleAddMedicinePopup} >Share Medicine</button>
+          {seenAddMedPopup? <ShareMedicinePopup toggle={toggleAddMedicinePopup}/>:null}
           {medicines && (
             <div>
               <table className="container">
