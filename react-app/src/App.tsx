@@ -4,6 +4,7 @@ import "./App.css";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
+import Popup from "reactjs-popup";
 
 function App() {
   const {
@@ -81,6 +82,32 @@ function App() {
     alert("I want" + id);
   };
 
+  function ShareMedicinePopup() {
+    return (
+      <Popup trigger={<button className="button">Share Medicine</button>}>
+        <div>
+          <form>
+            <label>Name of Medicine </label>
+            <br></br>
+            <input type="text" />
+            <br></br>
+            <label>Name of Medicine </label>
+            <br></br>
+            <input type="text" />
+            <br></br>
+            <label>Name of Medicine </label>
+            <br></br>
+            <input type="text" />
+            <br></br>
+            <label>Name of Medicine </label>
+            <br></br>
+            <input type="text" />
+          </form>
+        </div>
+      </Popup>
+    );
+  }
+
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
   }
@@ -112,7 +139,8 @@ function App() {
         <h1>Logged in: {user?.displayName}</h1>
         {/* <h1>Token: {token}</h1> */}
         <div>
-          <button className="button">Share Medicine</button>
+          {/* <button className="button">Share Medicine</button> */}
+          <ShareMedicinePopup/>
           {medicines && (
             <div>
               <table className="container">
