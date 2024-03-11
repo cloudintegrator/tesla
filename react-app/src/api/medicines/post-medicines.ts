@@ -2,11 +2,10 @@ import api from "./instance";
 import { Medicine } from "../types/medicine";
 
 export async function postMedicine(accessToken: string, payload: Medicine) {
-  console.log(accessToken);
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
-  
+  console.log(payload);
   const response = await api.post("/medicines", payload, {
     headers: headers
   });

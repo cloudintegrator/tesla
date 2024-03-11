@@ -99,19 +99,25 @@ function App() {
       const medicine_validity = document.getElementById(
         "medicine_validity"
       ) as HTMLInputElement;
-      
-      let x=new Date(medicine_validity.value);
-      let m=x.getMonth();
-      let d=x.getDate();
-      let y=x.getFullYear();
+
+
+      let created_date=new Date();
+      let created_date_day=addLeadingZero(created_date.getDate());
+      let created_date_month=addLeadingZero(created_date.getMonth());
+      let created_date_year=created_date.getFullYear();
+
+      let x = new Date(medicine_validity.value);
+      let m = addLeadingZero(x.getMonth());
+      let d = addLeadingZero(x.getDate());
+      let y = x.getFullYear();
 
       const med: Medicine = {
-        email: user?.email,
+        email: user?.username,
+        created: created_date_year+"-"+created_date_month+"-"+created_date_day,
         medicine_name: medicine_name.value,
         medicine_qty: Number(medicine_qty.value),
-        medicine_validity: y+"-"+m+"-"+d
+        medicine_validity: y + "-" + m + "-" + d,
       };
-
       const accessToken = await getAccessToken();
       postMedicine(accessToken, med)
         .then((res) => {
@@ -121,6 +127,10 @@ function App() {
         .catch((e) => {
           console.log(e);
         });
+    }
+    function addLeadingZero(n) {
+      if (n <= 9) return "0" + n;
+      else return n;
     }
     return (
       <div className="share-medicine-popup-div">
