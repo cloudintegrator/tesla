@@ -1,8 +1,8 @@
 export interface Medicine {
     id?: string;
     email?: string;
-    created?: Date;
+    created?: string;
     medicine_name?: string;
     medicine_qty?: number;
-    medicine_validity?: Date;
+    medicine_validity?: string;
   }

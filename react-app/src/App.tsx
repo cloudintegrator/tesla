@@ -4,7 +4,7 @@ import "./App.css";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
-import Popup from "reactjs-popup";
+import { postMedicine } from "./api/medicines/post-medicines";
 
 function App() {
   const {
@@ -22,7 +22,7 @@ function App() {
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
   const [token, setToken] = useState("");
   const [medicines, setMedicines] = useState<Medicine[] | null>(null);
-  const [seenAddMedPopup, setSeenAddMedPopup] = useState(false)
+  const [seenAddMedPopup, setSeenAddMedPopup] = useState(false);
 
   useEffect(() => {
     async function signInCheck() {
@@ -79,7 +79,7 @@ function App() {
       });
   };
 
-  function toggleAddMedicinePopup(){
+  function toggleAddMedicinePopup() {
     setSeenAddMedPopup(!seenAddMedPopup);
   }
 
@@ -88,20 +88,39 @@ function App() {
   };
 
   function ShareMedicinePopup(props) {
-    function handleShareMedicine(e) {
+    async function handleShareMedicine(e) {
       e.preventDefault();
-      const medicine_name = document.getElementById("medicine_name") as HTMLInputElement;
-      const medicine_qty = document.getElementById("medicine_qty") as HTMLInputElement;
-      const medicine_validity=document.getElementById("medicine_validity") as HTMLInputElement;
+      const medicine_name = document.getElementById(
+        "medicine_name"
+      ) as HTMLInputElement;
+      const medicine_qty = document.getElementById(
+        "medicine_qty"
+      ) as HTMLInputElement;
+      const medicine_validity = document.getElementById(
+        "medicine_validity"
+      ) as HTMLInputElement;
+      
+      let x=new Date(medicine_validity.value);
+      let m=x.getMonth();
+      let d=x.getDate();
+      let y=x.getFullYear();
 
-      const med: Medicine={
+      const med: Medicine = {
         email: user?.email,
         medicine_name: medicine_name.value,
-        medicine_qty:Number(medicine_qty.value),
-        medicine_validity:new Date(medicine_validity.value)
+        medicine_qty: Number(medicine_qty.value),
+        medicine_validity: y+"-"+m+"-"+d
       };
-      props.toggle();
-      console.log(medicine_validity.value);
+
+      const accessToken = await getAccessToken();
+      postMedicine(accessToken, med)
+        .then((res) => {
+          console.log(res);
+          props.toggle();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
     return (
       <div className="share-medicine-popup-div">
@@ -132,7 +151,6 @@ function App() {
     );
   }
 
- 
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
   }
@@ -164,8 +182,12 @@ function App() {
         <h1>Logged in: {user?.displayName}</h1>
         {/* <h1>Token: {token}</h1> */}
         <div>
-          <button className="button" onClick={toggleAddMedicinePopup} >Share Medicine</button>
-          {seenAddMedPopup? <ShareMedicinePopup toggle={toggleAddMedicinePopup}/>:null}
+          <button className="button" onClick={toggleAddMedicinePopup}>
+            Share Medicine
+          </button>
+          {seenAddMedPopup ? (
+            <ShareMedicinePopup toggle={toggleAddMedicinePopup} />
+          ) : null}
           {medicines && (
             <div>
               <table className="container">
