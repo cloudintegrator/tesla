@@ -102,11 +102,13 @@ function App() {
           <input
             className="share-medicine-popup-input"
             id="medicine_qty"
+            min={1}
+            max={selectedMed?.medicine_qty}
             type="number"
           />
         </form>
         <button className="button" onClick={handleButton}>
-          Close
+          Done
         </button>
       </div>
     );
@@ -173,6 +175,7 @@ function App() {
           <input
             className="share-medicine-popup-input"
             id="medicine_qty"
+            min={1}
             type="number"
           />
           <label className="share-medicine-popup-label">Expiry Date</label>
