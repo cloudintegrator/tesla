@@ -194,6 +194,10 @@ function App() {
     );
   }
 
+  function handleSearchMedicine(){
+    
+  }
+
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
   }
@@ -228,6 +232,13 @@ function App() {
           <button className="button" onClick={toggleAddMedicinePopup}>
             Share Medicine
           </button>
+          <br/>
+          <br/>
+          <br/>
+          <div style={{width:"50%",margin:"auto",display:"inline"}}>
+            <input className="share-medicine-popup-input" type="string"/>
+            <button className="button" >Search</button>
+          </div>
           {seenAddMedPopup ? (
             <ShareMedicinePopup toggle={toggleAddMedicinePopup} />
           ) : null}
