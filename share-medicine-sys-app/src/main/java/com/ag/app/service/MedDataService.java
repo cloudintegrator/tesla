@@ -61,5 +61,19 @@ public class MedDataService {
         return result;
     }
 
+    public List<MedDataDTO> searchMedicines(String medicine_name) {
+        List<MedDataEntity> list = medDataRepository.findByMedicineName(medicine_name);
+        final List<MedDataDTO> result = new ArrayList<>();
+        list.stream().forEach((item) -> {
+            result.add(new MedDataDTO(item.getId(),
+                    item.getEmail(),
+                    item.getCreated(),
+                    item.getMedicine_name(),
+                    item.getMedicine_qty(),
+                    item.getMedicine_validity()));
+        });
+        return result;
+    }
+
 
 }
