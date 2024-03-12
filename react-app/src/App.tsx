@@ -47,15 +47,21 @@ function App() {
   }, []);
 
   async function getMedicines() {
-    const flag = await isAuthenticated();
+    let flag = await isAuthenticated();
+    let accessToken = await getAccessToken();
+    let user = await getBasicUserInfo();
     if (flag) {
       setIsLoading(true);
-      const accessToken = await getAccessToken();
       gm(accessToken)
         .then((res) => {
           let data = res.data;
-          setMedicines(data);
-          console.log(data);
+          let temp: Medicine[] = [];
+          data.forEach((d) => {
+            if (d.email !== user?.username) {
+              temp.push(d);
+            }
+          });
+          setMedicines(temp);
           setIsLoading(false);
         })
         .catch((e) => {
