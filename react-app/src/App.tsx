@@ -96,7 +96,15 @@ function App() {
       props.toggle();
     }
     return (
-      <div>
+      <div className="pick-medicine-popup-div">
+        <form id="add_med_form" onSubmit={handleButton}>
+        <label className="share-medicine-popup-label">Quantity</label>
+          <input
+            className="share-medicine-popup-input"
+            id="medicine_qty"
+            type="number"
+          />
+        </form>
         <button className="button" onClick={handleButton}>
           Close
         </button>

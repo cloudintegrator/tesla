@@ -191,9 +191,11 @@
 }
 
 .share-medicine-popup-div{
+  width: 30%;
   border-radius: 5px;
   background-color: white;
   padding: 20px;
+  margin: auto;
 }
 .share-medicine-popup-input{
   width: 100%;
@@ -207,4 +209,11 @@
 .share-medicine-popup-label{
   color: black;
   
+}
+.pick-medicine-popup-div{
+  width: 30%;
+  border-radius: 5px;
+  background-color: white;
+  padding: 20px;
+  margin: auto;
 }
