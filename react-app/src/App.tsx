@@ -170,6 +170,7 @@ function App() {
             className="share-medicine-popup-input"
             id="medicine_name"
             type="text"
+            required
           />
           <label className="share-medicine-popup-label">Quantity</label>
           <input
@@ -177,12 +178,14 @@ function App() {
             id="medicine_qty"
             min={1}
             type="number"
+            required
           />
           <label className="share-medicine-popup-label">Expiry Date</label>
           <input
             className="share-medicine-popup-input"
             id="medicine_validity"
             type="date"
+            required
           />
           <button className="button" type="submit">
             Add
