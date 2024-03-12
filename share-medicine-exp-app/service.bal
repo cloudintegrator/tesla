@@ -61,7 +61,24 @@ service / on new http:Listener(9090) {
         Medicine[] med=check httpClient-> get("/fwzo/sharemedicinesysapp/health-5c6/v1.0/medicines",headers);
         log:printInfo("********** MEDICINES **********"+med.toJsonString());
         return med;
-        
+    }
+
+    resource function get search(string token,string medicine_name) returns Medicine[]|error{
+        string host="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev";
+        string basePath="/fwzo/sharemedicinesysapp/health-5c6/v1.0/medicines/search";
+        string params="medicine_name="+medicine_name;
+        string fullPath=basePath+"?"+params;
+
+        log:printInfo("Token: "+token);
+        log:printInfo("Full Path: "+fullPath);
+        map<string|string> headers={
+            "Authorization": "Bearer " + token
+        };
+
+        http:Client httpClient = check new (host);
+        Medicine[] med=check httpClient-> get(fullPath,headers);
+        log:printInfo("********** MEDICINES **********"+med.toJsonString());
+        return med;
     }
 
 }
