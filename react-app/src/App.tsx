@@ -46,11 +46,8 @@ function App() {
   }, []);
 
   async function getUser() {
-    setIsLoading(true);
-    const userResponse = await getBasicUserInfo();
-    const token = await getAccessToken();
-    setToken(token);
-    setUser(userResponse);
+    const user = await getBasicUserInfo();
+    setUser(user);
   }
 
   async function getMedicines() {
@@ -98,7 +95,7 @@ function App() {
     return (
       <div className="pick-medicine-popup-div">
         <form id="add_med_form" onSubmit={handleButton}>
-        <label className="share-medicine-popup-label">Quantity</label>
+          <label className="share-medicine-popup-label">Quantity</label>
           <input
             className="share-medicine-popup-input"
             id="medicine_qty"
