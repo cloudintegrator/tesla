@@ -35,18 +35,16 @@ function App() {
     }
     signInCheck().then((res) => {
       if (res) {
-        getUser();
+        getBasicUserInfo().then((user) => {
+          setUser(user);
+        });
+
         getMedicines();
       } else {
         console.log("User has not signed in");
       }
     });
   }, []);
-
-  async function getUser() {
-    const user = await getBasicUserInfo();
-    setUser(user);
-  }
 
   async function getMedicines() {
     const flag = await isAuthenticated();
