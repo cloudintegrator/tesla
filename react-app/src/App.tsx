@@ -5,7 +5,6 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
 import { postMedicine } from "./api/medicines/post-medicines";
-import { get } from "http";
 
 function App() {
   const {
@@ -21,7 +20,6 @@ function App() {
   const [user, setUser] = useState<BasicUserInfo | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-  const [token, setToken] = useState("");
   const [medicines, setMedicines] = useState<Medicine[] | null>(null);
   const [seenAddMedPopup, setSeenAddMedPopup] = useState(false);
   const [seenPickMedPopup, setSeenPickMedPopup] = useState(false);
