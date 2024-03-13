@@ -141,7 +141,7 @@ function App() {
         email: user?.username,
         created:
           created_date_year + "-" + created_date_month + "-" + created_date_day,
-        medicine_name: medicine_name.value,
+        medicine_name: medicine_name.value?.toUpperCase(),
         medicine_qty: Number(medicine_qty.value),
         medicine_validity: y + "-" + m + "-" + d,
       };
