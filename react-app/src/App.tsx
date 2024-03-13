@@ -296,7 +296,7 @@ function App() {
                             Pick
                           </button>
                         ) : null}
-                        {seenPickMedPopup ? (
+                        {seenPickMedPopup && selectedMed?.id === obj.id ? (
                           <PickMedicinePopup
                             toggle={() => togglePickMedicinePopup(obj)}
                           />
