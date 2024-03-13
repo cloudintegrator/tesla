@@ -103,7 +103,7 @@ function App() {
             className="share-medicine-popup-input"
             id="medicine_qty"
             defaultValue={1}
-            min={1}
+            min={0}
             max={selectedMed?.medicine_qty}
             type="number"
           />
