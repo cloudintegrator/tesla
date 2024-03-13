@@ -194,9 +194,7 @@ function App() {
     );
   }
 
-  function handleSearchMedicine(){
-    
-  }
+  function handleSearchMedicine() {}
 
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
@@ -232,12 +230,14 @@ function App() {
           <button className="button" onClick={toggleAddMedicinePopup}>
             Share Medicine
           </button>
-          <br/>
-          <br/>
-          <br/>
-          <div style={{width:"50%",margin:"auto",display:"inline"}}>
-            <input className="share-medicine-popup-input" type="string"/>
-            <button className="button" >Search</button>
+          <br />
+          <br />
+          <br />
+          <div className="inline fields">
+            <div className="field">
+              <input style={{height:"40px",width:"50%"}} type="string" />
+              <button className="button">Search</button>
+            </div>
           </div>
           {seenAddMedPopup ? (
             <ShareMedicinePopup toggle={toggleAddMedicinePopup} />
