@@ -194,7 +194,10 @@ function App() {
     );
   }
 
-  function handleSearchMedicine() {}
+  function handleSearchMedicine() {
+    const input_elm = document.getElementById("search-medicine-name") as HTMLInputElement;
+    console.log(input_elm.value);
+  }
 
   if (isAuthLoading) {
     return <div className="animate-spin h-5 w-5 text-white">.</div>;
@@ -235,8 +238,8 @@ function App() {
           <br />
           <div className="inline fields">
             <div className="field">
-              <input style={{height:"40px",width:"50%"}} type="string" />
-              <button className="button">Search</button>
+              <input id="search-medicine-name" style={{height:"40px",width:"50%"}} type="string" />
+              <button className="button" onClick={handleSearchMedicine}>Search</button>
             </div>
           </div>
           {seenAddMedPopup ? (
