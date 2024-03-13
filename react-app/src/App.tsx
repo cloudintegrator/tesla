@@ -5,6 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
 import { postMedicine } from "./api/medicines/post-medicines";
+import { search } from "./api/medicines/search-medicines";
 
 function App() {
   const {
@@ -194,9 +195,21 @@ function App() {
     );
   }
 
-  function handleSearchMedicine() {
-    const input_elm = document.getElementById("search-medicine-name") as HTMLInputElement;
+  async function handleSearchMedicine() {
+    setIsLoading(true);
+    const input_elm = document.getElementById(
+      "search-medicine-name"
+    ) as HTMLInputElement;
     console.log(input_elm.value);
+    let token = await getAccessToken();
+    search(token, input_elm.value)
+      .then((res) => {
+        setMedicines(res.data);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
   }
 
   if (isAuthLoading) {
@@ -238,8 +251,14 @@ function App() {
           <br />
           <div className="inline fields">
             <div className="field">
-              <input id="search-medicine-name" style={{height:"40px",width:"50%"}} type="string" />
-              <button className="button" onClick={handleSearchMedicine}>Search</button>
+              <input
+                id="search-medicine-name"
+                style={{ height: "40px", width: "50%" }}
+                type="string"
+              />
+              <button className="button" onClick={handleSearchMedicine}>
+                Search
+              </button>
             </div>
           </div>
           {seenAddMedPopup ? (
