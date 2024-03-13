@@ -102,6 +102,7 @@ function App() {
           <input
             className="share-medicine-popup-input"
             id="medicine_qty"
+            defaultValue={1}
             min={1}
             max={selectedMed?.medicine_qty}
             type="number"
