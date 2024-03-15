@@ -82,7 +82,7 @@ service / on new http:Listener(9090) {
         return med;
     }
 
-    resource function post pick(@http:Payload Medicine medicine) returns Response|error{
+    resource function post pick(Medicine medicine) returns Response|error{
         check self.mqClient->publishMessage({
             content: medicine,
             routingKey: "PICK.MEDICINE.QUEUE"
