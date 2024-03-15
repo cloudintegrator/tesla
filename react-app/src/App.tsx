@@ -128,7 +128,7 @@ function App() {
         "medicine_validity"
       ) as HTMLInputElement;
       const btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-      btnAdd.disabled=true;
+      btnAdd.disabled = true;
 
       let created_date = new Date();
       let created_date_day = addLeadingZero(created_date.getDate());
@@ -153,7 +153,7 @@ function App() {
       postMedicine(accessToken, med)
         .then((res) => {
           console.log(res);
-          btnAdd.disabled=false;
+          btnAdd.disabled = false;
           props.toggle();
         })
         .catch((e) => {
@@ -209,7 +209,14 @@ function App() {
     let token = await getAccessToken();
     search(token, input_elm.value)
       .then((res) => {
-        setMedicines(res.data);
+        let data = res.data;
+        let temp: Medicine[] = [];
+        data.forEach((d) => {
+          if (d.email !== user?.username) {
+            temp.push(d);
+          }
+        });
+        setMedicines(temp);
         setIsLoading(false);
       })
       .catch(() => {
