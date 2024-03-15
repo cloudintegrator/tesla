@@ -145,6 +145,7 @@ function App() {
         medicine_name: medicine_name.value?.toUpperCase(),
         medicine_qty: Number(medicine_qty.value),
         medicine_validity: y + "-" + m + "-" + d,
+        expired:false
       };
       const accessToken = await getAccessToken();
       postMedicine(accessToken, med)

@@ -9,7 +9,7 @@ public type Medicine record{|
     string medicine_name;
     int medicine_qty;
     string medicine_validity;
-    boolean expired?;
+    boolean expired;
 |};
 
 public type Response record{
