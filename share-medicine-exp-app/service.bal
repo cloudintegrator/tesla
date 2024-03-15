@@ -82,18 +82,18 @@ service / on new http:Listener(9090) {
         return med;
     }
 
-    // resource function post pick(Medicine medicine) returns Response|error{
-    //     check self.mqClient->publishMessage({
-    //         content: medicine,
-    //         routingKey: "PICK.MEDICINE.QUEUE"
-    //     });
+    resource function post pick(Medicine medicine) returns Response|error{
+        check self.mqClient->publishMessage({
+            content: medicine,
+            routingKey: "PICK.MEDICINE.QUEUE"
+        });
 
-    //     log:printInfo("********** Picked Medicine information posted successfully **********");
-    //     Response r={
-    //         status: 201,
-    //         message: "Sent data to Rabbit MQ"
-    //     };
-    //     return r;
-    // }
+        log:printInfo("********** Picked Medicine information posted successfully **********");
+        Response r={
+            status: 201,
+            message: "Sent data to Rabbit MQ"
+        };
+        return r;
+    }
 
 }
