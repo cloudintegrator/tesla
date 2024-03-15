@@ -4,7 +4,6 @@ package com.ag.app.service;
 import com.ag.app.dao.MedDataRepository;
 import com.ag.app.entity.MedDataEntity;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.catalina.LifecycleState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -21,15 +20,6 @@ public class MedDataService {
     static Logger logger = LoggerFactory.getLogger(MedDataService.class);
     @Autowired
     private MedDataRepository medDataRepository;
-
-    public record MedDataDTO(@JsonProperty("id") Integer id,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("created") Date created,
-                             @JsonProperty("medicine_name") String medicine_name,
-                             @JsonProperty("medicine_qty") Integer medicine_qty,
-                             @JsonProperty("medicine_validity") Date medicine_validity) implements Serializable {
-
-    }
 
     @RabbitListener(queues = "MEDICINE.QUEUE")
     public void handleMessage(final MedDataDTO med) {
@@ -56,7 +46,7 @@ public class MedDataService {
                     item.getCreated(),
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
-                    item.getMedicine_validity()));
+                    item.getMedicine_validity(), item.getExpired()));
         });
         return result;
     }
@@ -70,9 +60,20 @@ public class MedDataService {
                     item.getCreated(),
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
-                    item.getMedicine_validity()));
+                    item.getMedicine_validity(),
+                    item.getExpired()));
         });
         return result;
+    }
+
+    public record MedDataDTO(@JsonProperty("id") Integer id,
+                             @JsonProperty("email") String email,
+                             @JsonProperty("created") Date created,
+                             @JsonProperty("medicine_name") String medicine_name,
+                             @JsonProperty("medicine_qty") Integer medicine_qty,
+                             @JsonProperty("medicine_validity") Date medicine_validity,
+                             @JsonProperty("expired") Boolean expired) implements Serializable {
+
     }
 
 

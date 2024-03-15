@@ -5,15 +5,14 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "med_data")
-public class MedDataEntity {
+@Table(name = "picked_med_data")
+public class PickedMedDataEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String email;
-    private Date created;
     private String medicine_name;
     private Integer medicine_qty;
     private Date medicine_validity;
@@ -33,14 +32,6 @@ public class MedDataEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
     }
 
     public String getMedicine_name() {
