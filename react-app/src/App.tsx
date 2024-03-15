@@ -25,6 +25,8 @@ function App() {
   const [seenAddMedPopup, setSeenAddMedPopup] = useState(false);
   const [seenPickMedPopup, setSeenPickMedPopup] = useState(false);
   const [selectedMed, setSelectedMed] = useState<Medicine | null>(null);
+  const [includeMine, setIncludeMine] = useState(true);
+
   useEffect(() => {
     async function signInCheck() {
       setIsAuthLoading(true);
@@ -57,12 +59,16 @@ function App() {
         .then((res) => {
           let data = res.data;
           let temp: Medicine[] = [];
-          data.forEach((d) => {
-            if (d.email !== user?.username) {
-              temp.push(d);
-            }
-          });
-          setMedicines(temp);
+          if (includeMine) {
+            setMedicines(data);
+          } else {
+            data.forEach((d) => {
+              if (d.email !== user?.username) {
+                temp.push(d);
+              }
+            });
+            setMedicines(temp);
+          }
           setIsLoading(false);
         })
         .catch((e) => {
@@ -210,13 +216,18 @@ function App() {
     search(token, input_elm.value)
       .then((res) => {
         let data = res.data;
-        let temp: Medicine[] = [];
-        data.forEach((d) => {
-          if (d.email !== user?.username) {
-            temp.push(d);
-          }
-        });
-        setMedicines(temp);
+        if(includeMine){
+          setMedicines(data);
+        }
+        else{
+          let temp: Medicine[] = [];
+          data.forEach((d) => {
+            if (d.email !== user?.username) {
+              temp.push(d);
+            }
+          });
+          setMedicines(temp);
+        }
         setIsLoading(false);
       })
       .catch(() => {
@@ -271,6 +282,16 @@ function App() {
               <button className="button" onClick={handleSearchMedicine}>
                 Search
               </button>
+              <input
+                type="checkbox"
+                id="isMine"
+                name="Mine"
+                checked={includeMine}
+                onChange={(e) => {
+                  setIncludeMine(!includeMine);
+                }}
+              />
+              <label>Mine</label>
             </div>
           </div>
           {seenAddMedPopup ? (
