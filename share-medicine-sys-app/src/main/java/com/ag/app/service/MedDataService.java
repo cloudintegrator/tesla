@@ -30,6 +30,7 @@ public class MedDataService {
             medDataEntity.setMedicine_name(med.medicine_name);
             medDataEntity.setMedicine_qty(med.medicine_qty);
             medDataEntity.setMedicine_validity(med.medicine_validity);
+            medDataEntity.setExpired(med.expired);
             MedDataEntity res = medDataRepository.save(medDataEntity);
             logger.info(String.format("Successfully created record:%s", res.getId()));
         } catch (Exception e) {
