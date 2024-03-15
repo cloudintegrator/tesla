@@ -127,6 +127,8 @@ function App() {
       const medicine_validity = document.getElementById(
         "medicine_validity"
       ) as HTMLInputElement;
+      const btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
+      btnAdd.disabled=true;
 
       let created_date = new Date();
       let created_date_day = addLeadingZero(created_date.getDate());
@@ -145,12 +147,13 @@ function App() {
         medicine_name: medicine_name.value?.toUpperCase(),
         medicine_qty: Number(medicine_qty.value),
         medicine_validity: y + "-" + m + "-" + d,
-        expired:false
+        expired: false,
       };
       const accessToken = await getAccessToken();
       postMedicine(accessToken, med)
         .then((res) => {
           console.log(res);
+          btnAdd.disabled=false;
           props.toggle();
         })
         .catch((e) => {
@@ -189,7 +192,7 @@ function App() {
             type="date"
             required
           />
-          <button className="button" type="submit">
+          <button className="button" id="btnAdd" type="submit">
             Add
           </button>
         </form>
