@@ -5,10 +5,11 @@ import ballerina/log;
 public type Medicine record{|
     int id?;
     string email;
-    string created;
+    string created?;
     string medicine_name;
     int medicine_qty;
     string medicine_validity;
+    boolean expired?;
 |};
 
 public type Response record{
@@ -79,6 +80,20 @@ service / on new http:Listener(9090) {
         Medicine[] med=check httpClient-> get(fullPath,headers);
         log:printInfo("********** MEDICINES **********"+med.toJsonString());
         return med;
+    }
+
+    resource function post pick(@http:Payload Medicine medicine) returns Response|error{
+        check self.mqClient->publishMessage({
+            content: medicine,
+            routingKey: "PICK.MEDICINE.QUEUE"
+        });
+
+        log:printInfo("********** Picked Medicine information posted successfully **********");
+        Response r={
+            status: 201,
+            message: "Sent data to Rabbit MQ"
+        };
+        return r;
     }
 
 }
