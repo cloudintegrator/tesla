@@ -42,7 +42,7 @@ public class MedDataService {
     }
 
     public List<MedDataDTO> getMedicines() {
-        List<MedDataEntity> list = medDataRepository.findAll();
+        List<MedDataEntity> list = medDataRepository.findByExpired(false);
         final List<MedDataDTO> result = new ArrayList<>();
         list.stream().forEach((item) -> {
             result.add(new MedDataDTO(item.getId(),
@@ -71,7 +71,7 @@ public class MedDataService {
     }
 
     public void updateExpiry() {
-        List<MedDataEntity> list = medDataRepository.findAll();
+        List<MedDataEntity> list = medDataRepository.findByExpired(false);
 
         LocalDate currentDate = LocalDate.now();
         list.forEach((med) -> {

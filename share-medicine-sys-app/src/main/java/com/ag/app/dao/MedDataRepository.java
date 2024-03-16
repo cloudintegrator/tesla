@@ -20,5 +20,8 @@ public interface MedDataRepository extends JpaRepository<MedDataEntity, Integer>
     @Modifying
     @Transactional
     @Query(value = "UPDATE MedDataEntity med SET med.expired = ?2 WHERE med.id = ?1")
-    void updateExpiredById(Integer id,Boolean expired);
+    void updateExpiredById(Integer id, Boolean expired);
+
+    @Query(value = "SELECT med FROM MedDataEntity med WHERE med.expired = ?1")
+    List<MedDataEntity> findByExpired(Boolean expired);
 }
