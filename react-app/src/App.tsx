@@ -211,6 +211,9 @@ function App() {
       if (n <= 9) return "0" + n;
       else return n;
     }
+    async function handleCancel(e) {
+      props.toggle();
+    }
     return (
       <div className="share-medicine-popup-div">
         <form id="add_med_form" onSubmit={handleShareMedicine}>
@@ -238,6 +241,13 @@ function App() {
           />
           <button className="button" id="btnAdd" type="submit">
             Add
+          </button>
+          <button
+            className="button-cancel"
+            id="btnCancel"
+            onClick={handleCancel}
+          >
+            Cancel
           </button>
         </form>
       </div>
