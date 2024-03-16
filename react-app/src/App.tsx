@@ -61,17 +61,17 @@ function App() {
           let data = res.data;
           let temp: Medicine[] = [];
           if (includeMine) {
-            data.forEach((d)=>{
-              d.created=d.created?.substring(0,10);
-              d.medicine_validity=d.medicine_validity?.substring(0,10);
+            data.forEach((d) => {
+              d.created = d.created?.substring(0, 10);
+              d.medicine_validity = d.medicine_validity?.substring(0, 10);
               temp.push(d);
-            })
+            });
             setMedicines(temp);
           } else {
             data.forEach((d) => {
               if (d.email !== user?.username) {
-                d.created=d.created?.substring(0,10);
-                d.medicine_validity=d.medicine_validity?.substring(0,10);
+                d.created = d.created?.substring(0, 10);
+                d.medicine_validity = d.medicine_validity?.substring(0, 10);
                 temp.push(d);
               }
             });
@@ -114,7 +114,7 @@ function App() {
       let medicine_qty = Number(medicine_qty_field.value);
       let actual_qty = selectedMed?.medicine_qty;
 
-      if (medicine_qty !== 0 && medicine_qty <= actual_qty! ) {
+      if (medicine_qty !== 0 && medicine_qty <= actual_qty!) {
         let temp: Medicine = {
           id: selectedMed?.id,
           email: selectedMed?.email,
@@ -252,11 +252,19 @@ function App() {
       .then((res) => {
         let data = res.data;
         if (includeMine) {
-          setMedicines(data);
+          let temp: Medicine[] = [];
+          data.forEach((d) => {
+            d.created = d.created?.substring(0, 10);
+            d.medicine_validity = d.medicine_validity?.substring(0, 10);
+            temp.push(d);
+          });
+          setMedicines(temp);
         } else {
           let temp: Medicine[] = [];
           data.forEach((d) => {
             if (d.email !== user?.username) {
+              d.created = d.created?.substring(0, 10);
+              d.medicine_validity = d.medicine_validity?.substring(0, 10);
               temp.push(d);
             }
           });
