@@ -5,5 +5,5 @@ export interface Medicine {
     medicine_name?: string;
     medicine_qty?: number;
     medicine_validity?: string;
-    expired: boolean
+    expired?: boolean
   }

@@ -6,6 +6,7 @@ import { getMedicines as gm } from "./api/medicines/get-medicines";
 import { Medicine } from "./api/types/medicine";
 import { postMedicine } from "./api/medicines/post-medicines";
 import { search } from "./api/medicines/search-medicines";
+import { pickMedicine } from "./api/medicines/pick-medicine";
 
 function App() {
   const {
@@ -99,6 +100,27 @@ function App() {
   function PickMedicinePopup(props) {
     async function handleButton(e) {
       console.log(selectedMed);
+      const medicine_qty = document.getElementById(
+        "medicine_qty"
+      ) as HTMLInputElement;
+      let temp: Medicine = {
+        id: selectedMed?.id,
+        email: selectedMed?.email,
+        medicine_name: selectedMed?.medicine_name,
+        medicine_qty: Number(medicine_qty.value),
+        medicine_validity: selectedMed?.medicine_validity,
+        expired: selectedMed?.expired,
+      };
+
+      setIsLoading(true);
+      const token = await getAccessToken();
+      pickMedicine(token, temp)
+        .then((res) => {
+          setIsLoading(false);
+        })
+        .finally(() => {
+          getMedicines();
+        });
       props.toggle();
     }
     return (
@@ -216,10 +238,9 @@ function App() {
     search(token, input_elm.value)
       .then((res) => {
         let data = res.data;
-        if(includeMine){
+        if (includeMine) {
           setMedicines(data);
-        }
-        else{
+        } else {
           let temp: Medicine[] = [];
           data.forEach((d) => {
             if (d.email !== user?.username) {

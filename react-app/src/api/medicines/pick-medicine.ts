@@ -1,7 +1,7 @@
 import api from "./instance";
 import { Medicine } from "../types/medicine";
 
-export async function postMedicine(accessToken: string, payload: Medicine) {
+export async function pickMedicine(accessToken: string, payload: Medicine|null) {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
