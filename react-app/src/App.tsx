@@ -357,7 +357,7 @@ function App() {
               <table className="container">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    {/* <th>ID</th> */}
                     <th>Published By</th>
                     <th>Published On</th>
                     <th>Medicine Name</th>
@@ -369,7 +369,7 @@ function App() {
                 <tbody>
                   {medicines.map((obj, idx) => (
                     <tr key={idx}>
-                      <td>{obj.id}</td>
+                      {/* <td>{obj.id}</td> */}
                       <td>{obj.email}</td>
                       <td>{obj.created?.toString()}</td>
                       <td>{obj.medicine_name?.toUpperCase()}</td>
