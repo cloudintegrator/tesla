@@ -155,6 +155,9 @@ function App() {
         <button className="button" onClick={handleButton}>
           Done
         </button>
+        <button className="button-cancel" onClick={(e)=>{props.toggle()}}>
+          Cancel
+        </button>
       </div>
     );
   }
