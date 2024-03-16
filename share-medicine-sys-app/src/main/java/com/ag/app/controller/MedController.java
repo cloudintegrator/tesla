@@ -37,7 +37,7 @@ public class MedController {
         return new Response(201, "Success");
     }
 
-    @PatchMapping("/medicines")
+    @GetMapping("/trigger")
     public Response updateExpiry() {
         medDataService.updateExpiry();
         return new Response(201, "Success");

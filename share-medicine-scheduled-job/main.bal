@@ -1,11 +1,12 @@
 import ballerina/io;
 import ballerina/http;
 
-const string SYS_APP_HOST="http://sharemedicinesysapp-3337726626:8080/medicines"
+const string SYS_APP_HOST="http://sharemedicinesysapp-3337726626:8080";
 
 
-http:Client httpclient = check new (SYS_APP_HOST);
+
 
 public function main() returns error? {
-    check httpClient -> patch(SYS_APP_BASEPATH)
+    http:Client httpClient = check new (SYS_APP_HOST);
+    check httpClient -> get("/trigger");
 }
