@@ -129,6 +129,9 @@ function App() {
         pickMedicine(token, temp)
           .then((res) => {
             setIsLoading(false);
+            alert(
+              "Please check your registered email.You will receive the details."
+            );
           })
           .finally(() => {
             getMedicines();
