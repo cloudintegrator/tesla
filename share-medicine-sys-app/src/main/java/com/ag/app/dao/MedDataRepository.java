@@ -16,4 +16,9 @@ public interface MedDataRepository extends JpaRepository<MedDataEntity, Integer>
     @Transactional
     @Query(value = "UPDATE MedDataEntity med SET med.medicine_qty = ?2 WHERE med.id = ?1")
     void updateQtyById(Integer id, Integer medicine_qty);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE MedDataEntity med SET med.expired = ?2 WHERE med.id = ?1")
+    void updateExpiredById(Integer id,Boolean expired);
 }

@@ -37,6 +37,12 @@ public class MedController {
         return new Response(201, "Success");
     }
 
+    @PatchMapping("/medicines")
+    public Response updateExpiry() {
+        medDataService.updateExpiry();
+        return new Response(201, "Success");
+    }
+
     public record Response(@JsonProperty Integer code, @JsonProperty String message) {
     }
 

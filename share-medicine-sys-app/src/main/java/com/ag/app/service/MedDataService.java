@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -65,6 +68,21 @@ public class MedDataService {
                     item.getExpired()));
         });
         return result;
+    }
+
+    public void updateExpiry() {
+        List<MedDataEntity> list = medDataRepository.findAll();
+
+        LocalDate currentDate = LocalDate.now();
+        list.forEach((med) -> {
+            LocalDate validity = Instant.ofEpochMilli(med.getMedicine_validity().getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
+            if (currentDate.isAfter(validity)) {
+                medDataRepository.updateExpiredById(med.getId(), true);
+            }
+            if (med.getMedicine_qty() == 0) {
+                medDataRepository.deleteById(med.getId());
+            }
+        });
     }
 
     public record MedDataDTO(@JsonProperty("id") Integer id,
