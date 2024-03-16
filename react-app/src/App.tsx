@@ -100,27 +100,33 @@ function App() {
   function PickMedicinePopup(props) {
     async function handleButton(e) {
       console.log(selectedMed);
-      const medicine_qty = document.getElementById(
+      const medicine_qty_field = document.getElementById(
         "medicine_qty"
       ) as HTMLInputElement;
-      let temp: Medicine = {
-        id: selectedMed?.id,
-        email: selectedMed?.email,
-        medicine_name: selectedMed?.medicine_name,
-        medicine_qty: Number(medicine_qty.value),
-        medicine_validity: selectedMed?.medicine_validity,
-        expired: selectedMed?.expired,
-      };
 
-      setIsLoading(true);
-      const token = await getAccessToken();
-      pickMedicine(token, temp)
-        .then((res) => {
-          setIsLoading(false);
-        })
-        .finally(() => {
-          getMedicines();
-        });
+      let medicine_qty = Number(medicine_qty_field.value);
+      let actual_qty = selectedMed?.medicine_qty;
+
+      if (medicine_qty !== 0) {
+        let temp: Medicine = {
+          id: selectedMed?.id,
+          email: selectedMed?.email,
+          medicine_name: selectedMed?.medicine_name,
+          medicine_qty: medicine_qty,
+          medicine_validity: selectedMed?.medicine_validity,
+          expired: selectedMed?.expired,
+        };
+
+        setIsLoading(true);
+        const token = await getAccessToken();
+        pickMedicine(token, temp)
+          .then((res) => {
+            setIsLoading(false);
+          })
+          .finally(() => {
+            getMedicines();
+          });
+      }
       props.toggle();
     }
     return (
