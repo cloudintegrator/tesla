@@ -20,17 +20,24 @@ public type Response record{
 string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev";
 string SYS_APP_BASEPATH="/fwzo/sharemedicinesysapp/health-5c6/v1.0";
 
+
+string MQ_HOST="fish-01.rmq.cloudamqp.com";
+int MQ_PORT=5672;
+string MQ_USERNAME="aannimrm";
+string MQ_PASSWORD="B40g83-bYXRfan3MSsyi1DuQzvH_Nves";
+string MQ_VHOST="aannimrm";
+
 service / on new http:Listener(9090) {
     private final rabbitmq:ConnectionConfiguration connectionConfig;
     private final rabbitmq:Client mqClient;
 
     function init() returns error?{
         self.connectionConfig={
-            username: "aannimrm",
-            password: "B40g83-bYXRfan3MSsyi1DuQzvH_Nves",
-            virtualHost: "aannimrm"
+            username: MQ_USERNAME,
+            password: MQ_PASSWORD,
+            virtualHost: MQ_VHOST
         };
-        self.mqClient=check new ("fish-01.rmq.cloudamqp.com",5672,self.connectionConfig);
+        self.mqClient=check new (MQ_HOST,MQ_PORT,self.connectionConfig);
         log:printInfo("********** Service Initialized **********");
     }
 
