@@ -71,7 +71,7 @@ public class MedDataService {
     }
 
     public void updateExpiry() {
-        List<MedDataEntity> list = medDataRepository.findByExpired(false);
+        List<MedDataEntity> list = medDataRepository.findAll();
 
         LocalDate currentDate = LocalDate.now();
         list.forEach((med) -> {

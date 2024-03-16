@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface MedDataRepository extends JpaRepository<MedDataEntity, Integer> {
-    @Query(value = "SELECT med FROM MedDataEntity med WHERE med.medicine_name LIKE %?1%")
+    @Query(value = "SELECT med FROM MedDataEntity med WHERE med.medicine_name LIKE %?1% AND med.expired = false")
     List<MedDataEntity> findByMedicineName(String medicine_name);
 
     @Modifying
