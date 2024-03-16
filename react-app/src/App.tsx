@@ -61,10 +61,17 @@ function App() {
           let data = res.data;
           let temp: Medicine[] = [];
           if (includeMine) {
-            setMedicines(data);
+            data.forEach((d)=>{
+              d.created=d.created?.substring(0,10);
+              d.medicine_validity=d.medicine_validity?.substring(0,10);
+              temp.push(d);
+            })
+            setMedicines(temp);
           } else {
             data.forEach((d) => {
               if (d.email !== user?.username) {
+                d.created=d.created?.substring(0,10);
+                d.medicine_validity=d.medicine_validity?.substring(0,10);
                 temp.push(d);
               }
             });
