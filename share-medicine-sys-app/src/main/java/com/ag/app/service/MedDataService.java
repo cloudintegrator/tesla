@@ -79,7 +79,7 @@ public class MedDataService {
             if (currentDate.isAfter(validity)) {
                 medDataRepository.updateExpiredById(med.getId(), true);
             }
-            if (med.getMedicine_qty() == 0) {
+            if (med.getMedicine_qty() <= 0) {
                 medDataRepository.deleteById(med.getId());
             }
         });
