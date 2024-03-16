@@ -107,7 +107,7 @@ function App() {
       let medicine_qty = Number(medicine_qty_field.value);
       let actual_qty = selectedMed?.medicine_qty;
 
-      if (medicine_qty !== 0) {
+      if (medicine_qty !== 0 && medicine_qty <= actual_qty! ) {
         let temp: Medicine = {
           id: selectedMed?.id,
           email: selectedMed?.email,
