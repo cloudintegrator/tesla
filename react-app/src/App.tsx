@@ -141,7 +141,8 @@ function App() {
     }
     return (
       <div>
-        <form style={{padding:"40px"}}
+        <form
+          style={{ padding: "40px" }}
           id="add_med_form"
           onSubmit={handleButton}
         >
@@ -339,87 +340,92 @@ function App() {
     );
   } else {
     return (
-      <div className="App">
-        <h1>Logged in: {user?.displayName}</h1>
-        {/* <h1>Token: {token}</h1> */}
-        <div>
-          <button className="button" onClick={toggleAddMedicinePopup}>
-            Share Medicine
-          </button>
-          <br />
-          <br />
-          <br />
-          <div className="inline fields">
-            <div className="field">
-              <input
-                id="search-medicine-name"
-                style={{ height: "40px", width: "50%" }}
-                type="string"
-              />
-              <button className="button" onClick={handleSearchMedicine}>
-                Search
-              </button>
-              <input
-                type="checkbox"
-                id="isMine"
-                name="Mine"
-                checked={includeMine}
-                onChange={(e) => {
-                  setIncludeMine(!includeMine);
-                }}
-              />
-              <label>Mine</label>
-            </div>
-          </div>
-          {seenAddMedPopup ? (
-            <ShareMedicinePopup toggle={toggleAddMedicinePopup} />
-          ) : null}
-          {medicines && (
-            <div>
-              <table className="container">
-                <thead>
-                  <tr>
-                    {/* <th>ID</th> */}
-                    <th>Published By</th>
-                    <th>Published On</th>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Validity</th>
-                    <th>Acquire</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {medicines.map((obj, idx) => (
-                    <tr key={idx}>
-                      {/* <td>{obj.id}</td> */}
-                      <td>{obj.email}</td>
-                      <td>{obj.created?.toString()}</td>
-                      <td>{obj.medicine_name?.toUpperCase()}</td>
-                      <td>{obj.medicine_qty}</td>
-                      <td>{obj.medicine_validity?.toString()}</td>
-                      <td>
-                        {!seenPickMedPopup ? (
-                          <button
-                            className="button"
-                            onClick={() => togglePickMedicinePopup(obj)}
-                          >
-                            Pick
-                          </button>
-                        ) : null}
-                        {seenPickMedPopup && selectedMed?.id === obj.id ? (
-                          <PickMedicinePopup
-                            toggle={() => togglePickMedicinePopup(obj)}
-                          />
-                        ) : null}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+      <nav className="App">
+        <div style={{marginTop:"30px",padding:"10px"}}>
+          <button className="button-cancel" onClick={()=>signOut()}>LOGOUT</button>
         </div>
-      </div>
+        <div >
+          <h1>Logged in: {user?.displayName}</h1>
+          {/* <h1>Token: {token}</h1> */}
+          <div>
+            <button className="button" onClick={toggleAddMedicinePopup}>
+              Share Medicine
+            </button>
+            <br />
+            <br />
+            <br />
+            <div className="inline fields">
+              <div className="field">
+                <input
+                  id="search-medicine-name"
+                  style={{ height: "40px", width: "50%" }}
+                  type="string"
+                />
+                <button className="button" onClick={handleSearchMedicine}>
+                  Search
+                </button>
+                <input
+                  type="checkbox"
+                  id="isMine"
+                  name="Mine"
+                  checked={includeMine}
+                  onChange={(e) => {
+                    setIncludeMine(!includeMine);
+                  }}
+                />
+                <label>Mine</label>
+              </div>
+            </div>
+            {seenAddMedPopup ? (
+              <ShareMedicinePopup toggle={toggleAddMedicinePopup} />
+            ) : null}
+            {medicines && (
+              <div>
+                <table className="container">
+                  <thead>
+                    <tr>
+                      {/* <th>ID</th> */}
+                      <th>Published By</th>
+                      <th>Published On</th>
+                      <th>Medicine Name</th>
+                      <th>Quantity</th>
+                      <th>Validity</th>
+                      <th>Acquire</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {medicines.map((obj, idx) => (
+                      <tr key={idx}>
+                        {/* <td>{obj.id}</td> */}
+                        <td>{obj.email}</td>
+                        <td>{obj.created?.toString()}</td>
+                        <td>{obj.medicine_name?.toUpperCase()}</td>
+                        <td>{obj.medicine_qty}</td>
+                        <td>{obj.medicine_validity?.toString()}</td>
+                        <td>
+                          {!seenPickMedPopup ? (
+                            <button
+                              className="button"
+                              onClick={() => togglePickMedicinePopup(obj)}
+                            >
+                              Pick
+                            </button>
+                          ) : null}
+                          {seenPickMedPopup && selectedMed?.id === obj.id ? (
+                            <PickMedicinePopup
+                              toggle={() => togglePickMedicinePopup(obj)}
+                            />
+                          ) : null}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
     );
   }
 }
