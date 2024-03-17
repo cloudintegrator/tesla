@@ -35,7 +35,7 @@ public function updateExpiredMedicines() returns error? {
 }
 public function trigger(string token) returns error? {
     io:println(token);
-    http:Client httpClient = check new (SYS_APP_HOST);
+    http:Client httpClient = check new (SYS_APP_HOST,{timeout:180000});
     map<string|string> headers={
             "Authorization": "Bearer " + token
         };
