@@ -140,24 +140,63 @@ function App() {
       props.toggle();
     }
     return (
-      <div className="pick-medicine-popup-div">
-        <form id="add_med_form" onSubmit={handleButton}>
-          <label className="share-medicine-popup-label">Quantity</label>
-          <input
-            className="share-medicine-popup-input"
+      // <div className="pick-medicine-popup-div">
+      //   <form id="add_med_form" onSubmit={handleButton}>
+      //     <label className="share-medicine-popup-label">Quantity</label>
+      //     <input
+      //       className="share-medicine-popup-input"
+      //       id="medicine_qty"
+      //       defaultValue={1}
+      //       min={0}
+      //       max={selectedMed?.medicine_qty}
+      //       type="number"
+      //     />
+      //   </form>
+      //   <button className="button" onClick={handleButton}>
+      //     Done
+      //   </button>
+      //   <button className="button-cancel" onClick={(e)=>{props.toggle()}}>
+      //     Cancel
+      //   </button>
+      // </div>
+      <div>
+        <form
+          id="add_med_form"
+          style={{ width: "100%" }}
+          onSubmit={handleButton}
+        >
+          <label>Quantity</label>
+          <input style={{border: "1px solid #ccc;",padding: "12px 20px;",margin: "8px 0;"}}
             id="medicine_qty"
             defaultValue={1}
-            min={0}
+            min={1}
             max={selectedMed?.medicine_qty}
             type="number"
+            required
           />
+          <textarea
+            style={{ width: "100%",margin:"auto"}}
+            id="msg"
+            name="msg"
+            rows={4}
+            cols={20}
+            value={"Drop a message to the doer"}
+          />
+          <br></br>
+          <br></br>
+          <button className="button" id="btnAdd" type="submit">
+            Add
+          </button>
+          <button
+            className="button-cancel"
+            id="btnCancel"
+            onClick={(e) => {
+              props.toggle();
+            }}
+          >
+            Cancel
+          </button>
         </form>
-        <button className="button" onClick={handleButton}>
-          Done
-        </button>
-        <button className="button-cancel" onClick={(e)=>{props.toggle()}}>
-          Cancel
-        </button>
       </div>
     );
   }
