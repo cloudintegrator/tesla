@@ -324,6 +324,11 @@ function App() {
           <h1>
             <p>Share surplus meds, spread wellness.</p>
           </h1>
+          <h3>
+            <a href="https://github.com/cloudintegrator/tesla/blob/main/README.md">
+              About
+            </a>
+          </h3>
           <img src={logo} className="App-logo" alt="logo" />
           <button className="pill-btn" onClick={handleSignIn}>
             Login
@@ -341,10 +346,12 @@ function App() {
   } else {
     return (
       <nav className="App">
-        <div style={{marginTop:"30px",padding:"10px"}}>
-          <button className="button-cancel" onClick={()=>signOut()}>LOGOUT</button>
+        <div style={{ marginTop: "30px", padding: "10px" }}>
+          <button className="button-cancel" onClick={() => signOut()}>
+            LOGOUT
+          </button>
         </div>
-        <div >
+        <div>
           <h1>Logged in: {user?.displayName}</h1>
           {/* <h1>Token: {token}</h1> */}
           <div>
