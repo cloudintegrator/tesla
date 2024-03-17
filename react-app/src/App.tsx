@@ -322,7 +322,7 @@ function App() {
       <div>
         <header className="App-header">
           <h1>
-            <p>Unlock health: Share your unused meds.</p>
+            <p>Share surplus meds, spread wellness.</p>
           </h1>
           <img src={logo} className="App-logo" alt="logo" />
           <button className="button" onClick={handleSignIn}>
