@@ -140,33 +140,14 @@ function App() {
       props.toggle();
     }
     return (
-      // <div className="pick-medicine-popup-div">
-      //   <form id="add_med_form" onSubmit={handleButton}>
-      //     <label className="share-medicine-popup-label">Quantity</label>
-      //     <input
-      //       className="share-medicine-popup-input"
-      //       id="medicine_qty"
-      //       defaultValue={1}
-      //       min={0}
-      //       max={selectedMed?.medicine_qty}
-      //       type="number"
-      //     />
-      //   </form>
-      //   <button className="button" onClick={handleButton}>
-      //     Done
-      //   </button>
-      //   <button className="button-cancel" onClick={(e)=>{props.toggle()}}>
-      //     Cancel
-      //   </button>
-      // </div>
       <div>
-        <form
+        <form style={{padding:"40px"}}
           id="add_med_form"
-          style={{ width: "100%" }}
           onSubmit={handleButton}
         >
           <label>Quantity</label>
-          <input style={{border: "1px solid #ccc;",padding: "12px 20px;",margin: "8px 0;"}}
+          <input
+            className="share-medicine-popup-input"
             id="medicine_qty"
             defaultValue={1}
             min={1}
@@ -174,13 +155,12 @@ function App() {
             type="number"
             required
           />
+          <label>Message</label>
           <textarea
-            style={{ width: "100%",margin:"auto"}}
+            style={{ width: "100%", resize: "none" }}
             id="msg"
             name="msg"
             rows={4}
-            cols={20}
-            value={"Drop a message to the doer"}
           />
           <br></br>
           <br></br>
