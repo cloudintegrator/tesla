@@ -325,7 +325,7 @@ function App() {
             <p>Share surplus meds, spread wellness.</p>
           </h1>
           <img src={logo} className="App-logo" alt="logo" />
-          <button className="button" onClick={handleSignIn}>
+          <button className="pill-btn" onClick={handleSignIn}>
             Login
           </button>
         </header>
