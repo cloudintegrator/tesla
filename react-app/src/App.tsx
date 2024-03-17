@@ -110,6 +110,7 @@ function App() {
       const medicine_qty_field = document.getElementById(
         "medicine_qty"
       ) as HTMLInputElement;
+      const popup = document.getElementById("snackbar") as HTMLElement;
 
       let medicine_qty = Number(medicine_qty_field.value);
       let actual_qty = selectedMed?.medicine_qty;
@@ -124,17 +125,16 @@ function App() {
           expired: selectedMed?.expired,
         };
 
-        setIsLoading(true);
         const token = await getAccessToken();
         pickMedicine(token, temp)
           .then((res) => {
-            setIsLoading(false);
-            alert(
-              "Please check your registered email.You will receive the details."
-            );
+            popup.className = "show";
+            setTimeout(()=>{
+              popup.className = popup.className.replace("show", "");
+              getMedicines();
+            },5000)
           })
           .finally(() => {
-            getMedicines();
           });
       }
       props.toggle();
@@ -353,6 +353,8 @@ function App() {
         </div>
         <div>
           <h1>Logged in: {user?.displayName}</h1>
+          <div id="snackbar">Message has been sent to the doer.</div>
+
           {/* <h1>Token: {token}</h1> */}
           <div>
             <button className="button" onClick={toggleAddMedicinePopup}>
