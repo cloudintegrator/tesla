@@ -50,6 +50,30 @@ function App() {
     });
   }, []);
 
+  function populateRows(
+    includeMine: Boolean,
+    user: BasicUserInfo | null,
+    data: Medicine[]
+  ) {
+    let temp: Medicine[] = [];
+    if (includeMine) {
+      data.forEach((d) => {
+        d.created = d.created?.substring(0, 10);
+        d.medicine_validity = d.medicine_validity?.substring(0, 10);
+        temp.push(d);
+      });
+    } else {
+      data.forEach((d) => {
+        if (d.email !== user?.username) {
+          d.created = d.created?.substring(0, 10);
+          d.medicine_validity = d.medicine_validity?.substring(0, 10);
+          temp.push(d);
+        }
+      });
+    }
+
+    return temp;
+  }
   async function getMedicines() {
     let flag = await isAuthenticated();
     let accessToken = await getAccessToken();
@@ -59,24 +83,8 @@ function App() {
       gm(accessToken)
         .then((res) => {
           let data = res.data;
-          let temp: Medicine[] = [];
-          if (includeMine) {
-            data.forEach((d) => {
-              d.created = d.created?.substring(0, 10);
-              d.medicine_validity = d.medicine_validity?.substring(0, 10);
-              temp.push(d);
-            });
-            setMedicines(temp);
-          } else {
-            data.forEach((d) => {
-              if (d.email !== user?.username) {
-                d.created = d.created?.substring(0, 10);
-                d.medicine_validity = d.medicine_validity?.substring(0, 10);
-                temp.push(d);
-              }
-            });
-            setMedicines(temp);
-          }
+          let temp: Medicine[] = populateRows(includeMine, user, data);
+          setMedicines(temp);
           setIsLoading(false);
         })
         .catch((e) => {
@@ -129,13 +137,12 @@ function App() {
         pickMedicine(token, temp)
           .then((res) => {
             popup.className = "show";
-            setTimeout(()=>{
+            setTimeout(() => {
               popup.className = popup.className.replace("show", "");
               getMedicines();
-            },5000)
+            }, 5000);
           })
-          .finally(() => {
-          });
+          .finally(() => {});
       }
       props.toggle();
     }
@@ -235,6 +242,7 @@ function App() {
       else return n;
     }
     async function handleCancel(e) {
+      console.log(e);
       props.toggle();
     }
     return (
@@ -287,25 +295,8 @@ function App() {
     search(token, input_elm.value)
       .then((res) => {
         let data = res.data;
-        if (includeMine) {
-          let temp: Medicine[] = [];
-          data.forEach((d) => {
-            d.created = d.created?.substring(0, 10);
-            d.medicine_validity = d.medicine_validity?.substring(0, 10);
-            temp.push(d);
-          });
-          setMedicines(temp);
-        } else {
-          let temp: Medicine[] = [];
-          data.forEach((d) => {
-            if (d.email !== user?.username) {
-              d.created = d.created?.substring(0, 10);
-              d.medicine_validity = d.medicine_validity?.substring(0, 10);
-              temp.push(d);
-            }
-          });
-          setMedicines(temp);
-        }
+        let temp: Medicine[] = populateRows(includeMine, user, data);
+        setMedicines(temp);
         setIsLoading(false);
       })
       .catch(() => {
