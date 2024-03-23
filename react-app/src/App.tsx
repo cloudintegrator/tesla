@@ -118,10 +118,12 @@ function App() {
       const medicine_qty_field = document.getElementById(
         "medicine_qty"
       ) as HTMLInputElement;
+      const msg_field = document.getElementById("msg") as HTMLTextAreaElement;
       const popup = document.getElementById("snackbar") as HTMLElement;
 
       let medicine_qty = Number(medicine_qty_field.value);
       let actual_qty = selectedMed?.medicine_qty;
+      let msg = msg_field.value;
 
       if (medicine_qty !== 0 && medicine_qty <= actual_qty!) {
         let temp: Medicine = {
@@ -131,6 +133,7 @@ function App() {
           medicine_qty: medicine_qty,
           medicine_validity: selectedMed?.medicine_validity,
           expired: selectedMed?.expired,
+          msg: msg,
         };
 
         const token = await getAccessToken();

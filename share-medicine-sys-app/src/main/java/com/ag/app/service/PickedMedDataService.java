@@ -28,21 +28,24 @@ public class PickedMedDataService {
 
 
     public void save(MedDataService.MedDataDTO medDataDTO) {
-        // Save the picked medicine data.
-        PickedMedDataEntity entity = new PickedMedDataEntity();
-        entity.setEmail(medDataDTO.email());
-        entity.setMedicine_name(medDataDTO.medicine_name());
-        entity.setMedicine_qty(medDataDTO.medicine_qty());
-        entity.setMedicine_validity(medDataDTO.medicine_validity());
-        entity.setExpired(medDataDTO.expired());
-        entity = pickedMedDataRepository.save(entity);
-
-        // Deduct qty.
-        if (null != entity.getId()) {
+        try {
+            // Deduct qty.
             MedDataEntity medDataEntity = medDataRepository.findById(medDataDTO.id()).get();
             Integer qty = medDataEntity.getMedicine_qty();
             qty = qty - medDataDTO.medicine_qty();
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
+
+            // Save the picked medicine data.
+            PickedMedDataEntity entity = new PickedMedDataEntity();
+            entity.setEmail(medDataDTO.email());
+            entity.setMedicine_name(medDataDTO.medicine_name());
+            entity.setMedicine_qty(medDataDTO.medicine_qty());
+            entity.setMedicine_validity(medDataDTO.medicine_validity());
+            entity.setExpired(medDataDTO.expired());
+            entity = pickedMedDataRepository.save(entity);
+            System.out.println("Medicine pickup record created with id:" + entity.getId());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
