@@ -16,6 +16,7 @@ CREATE TABLE picked_med_data
    medicine_name longtext,
    medicine_qty int,
    medicine_validity timestamp,
-   expired bit
+   expired bit,
+   msg longtext
 )
 ;

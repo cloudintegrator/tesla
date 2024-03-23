@@ -17,6 +17,7 @@ public class PickedMedDataEntity {
     private Integer medicine_qty;
     private Date medicine_validity;
     private Boolean expired;
+    private String msg;
 
     public Integer getId() {
         return id;
@@ -64,5 +65,13 @@ public class PickedMedDataEntity {
 
     public void setExpired(Boolean expired) {
         this.expired = expired;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }
