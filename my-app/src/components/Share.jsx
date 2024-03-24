@@ -3,6 +3,7 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
+import ShareMedicine from "./ShareMedicine";
 
 const Share = () => {
   const { signOut, state, getBasicUserInfo } = useAuthContext();
@@ -94,7 +95,7 @@ const Share = () => {
         </div>
         <div className="main">
           <div className="report-container">
-            <h1>Form to input med data</h1>
+            <ShareMedicine/>
           </div>
         </div>
       </div>
