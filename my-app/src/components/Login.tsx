@@ -1,25 +1,16 @@
 import logo from "../logo.svg";
 import "../App.css";
-import React, { useState, useEffect } from "react";
-import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
+import { useAuthContext } from "@asgardeo/auth-react";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  const {
-    signIn,
-    signOut,
-    getAccessToken,
-    isAuthenticated,
-    getBasicUserInfo,
-    state,
-  } = useAuthContext();
-  const [signedIn, setSignedIn] = useState(false);
+const Login = ({ callBackLogin }) => {
+  const { signIn } = useAuthContext();
   const navigate = useNavigate();
 
   function handleSignIn() {
     signIn()
       .then(() => {
-        setSignedIn(true);
+        callBackLogin(true);
         navigate("/home");
       })
       .catch((e) => {

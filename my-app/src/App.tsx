@@ -4,10 +4,13 @@ import Share from "./components/Share";
 import Home from "./components/Home";
 import Login from "./components/Login";
 function App() {
+  function handleCallBackLogin(data){
+    console.log(data);
+  }
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login callBackLogin={handleCallBackLogin}/>} />
         <Route path="/home" element={<Home />} />
         <Route path="/share" element={<Share />} />
       </Routes>
