@@ -171,6 +171,7 @@ const Home = () => {
             />
             <label>Mine</label>
           </div>
+          {isLoading && <div className="loader"></div>}
           {medicines && (
             <div>
               <table className="container">
