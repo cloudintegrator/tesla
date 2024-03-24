@@ -1,6 +1,8 @@
 import "../dashboard.css";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "@asgardeo/auth-react";
 const Home = () => {
+  const { signOut } = useAuthContext();
   const navigate = useNavigate();
 
   function onHomeClick() {
@@ -11,7 +13,7 @@ const Home = () => {
     navigate("/share");
   }
   function onLogoutClick() {
-    navigate("/");
+    signOut();
   }
   return (
     <body>
