@@ -15,7 +15,7 @@ const Share = () => {
     signOut();
   }
   return (
-    <body>
+    <>
       <header>
         <div className="logosec">
           <div className="logo">SHARE MEDICINES</div>
@@ -72,7 +72,7 @@ const Share = () => {
           </div>
         </div>
       </div>
-    </body>
+    </>
   );
 };
 export default Share;

@@ -16,7 +16,7 @@ const Home = () => {
     signOut();
   }
   return (
-    <body>
+    <>
       <header>
         <div className="logosec">
           <div className="logo">SHARE MEDICINES</div>
@@ -83,7 +83,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </body>
+    </>
   );
 };
 export default Home;
