@@ -1,9 +1,11 @@
 import { Medicine } from "../api/types/medicine";
 import { postMedicine } from "../api/medicines/post-medicines";
 import { useAuthContext } from "@asgardeo/auth-react";
+import { useState } from "react";
 
 const ShareMedicine = (props) => {
-  const {getAccessToken,getBasicUserInfo} = useAuthContext();
+  const { getAccessToken, getBasicUserInfo } = useAuthContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleShareMedicine(e) {
     e.preventDefault();
@@ -29,7 +31,7 @@ const ShareMedicine = (props) => {
     let d = addLeadingZero(x.getDate());
     let y = x.getFullYear();
 
-    const user=await getBasicUserInfo();
+    const user = await getBasicUserInfo();
     const accessToken = await getAccessToken();
 
     const med: Medicine = {
@@ -41,30 +43,27 @@ const ShareMedicine = (props) => {
       medicine_validity: y + "-" + m + "-" + d,
       expired: false,
     };
-    
+
+    setIsLoading(true);
     postMedicine(accessToken, med)
       .then((res) => {
         console.log(res);
-        btnAdd.disabled = false;
         props.toggle();
       })
       .catch((e) => {
         console.log(e);
       })
       .finally(() => {
-       
+        setIsLoading(false);
       });
   }
   function addLeadingZero(n) {
     if (n <= 9) return "0" + n;
     else return n;
   }
-  async function handleCancel(e) {
-    console.log(e);
-    props.toggle();
-  }
   return (
     <div className="share-medicine-popup-div">
+      {isLoading && <div className="loader"></div>}
       <form id="add_med_form" onSubmit={handleShareMedicine}>
         <label className="share-medicine-popup-label">Medicine</label>
         <input
