@@ -41,6 +41,17 @@ const Home = () => {
             alt="menu-icon"
           />
         </div>
+        <div className="message">
+          <div className="circle"></div>
+          <div className="dp">
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+              className="dpicn"
+              alt="dp"
+            />
+          </div>
+          <h2>{user?.username}</h2>
+        </div>
       </header>
 
       <div className="main-container">

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const Login = ({ callBackLogin }) => {
-  const { signIn, getBasicUserInfo, state } = useAuthContext();
+  const { signIn, state } = useAuthContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,7 +29,12 @@ const Login = ({ callBackLogin }) => {
           </a>
         </h3>
         <img src={logo} className="App-logo" alt="logo" />
-        <button className="pill-btn" onClick={()=>{signIn()}}>
+        <button
+          className="pill-btn"
+          onClick={() => {
+            signIn();
+          }}
+        >
           Login
         </button>
       </header>

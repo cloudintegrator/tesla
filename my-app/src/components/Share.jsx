@@ -1,10 +1,24 @@
 import "../dashboard.css";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "@asgardeo/auth-react";
-const Share = () => {
-  const {signOut}=useAuthContext();
+import { useEffect, useState } from "react";
 
+const Share = () => {
+  const { signOut, state, getBasicUserInfo } = useAuthContext();
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    console.log("[Share] - Updating Share page...");
+    if (state.isAuthenticated) {
+      console.log("[Share] - User logged in...");
+      getBasicUserInfo().then((data) => {
+        setUser(data);
+        console.log("[Share] - User logged in...", user?.username);
+      });
+    }
+  }, []);
+
   function onHomeClick() {
     navigate("/home");
   }
@@ -26,6 +40,17 @@ const Share = () => {
             alt="menu-icon"
           />
         </div>
+        <div className="message">
+          <div className="circle"></div>
+          <div className="dp">
+            <img
+              src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
+              className="dpicn"
+              alt="dp"
+            />
+          </div>
+        </div>
+        <h2>{user?.username}</h2>
       </header>
 
       <div className="main-container">
