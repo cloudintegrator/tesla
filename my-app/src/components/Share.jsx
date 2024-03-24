@@ -1,4 +1,5 @@
 import "../dashboard.css";
+import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
@@ -49,8 +50,8 @@ const Share = () => {
               alt="dp"
             />
           </div>
+          <h2>{user?.username}</h2>
         </div>
-        <h2>{user?.username}</h2>
       </header>
 
       <div className="main-container">
