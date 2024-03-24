@@ -52,7 +52,7 @@ const ShareMedicine = (props) => {
         console.log(e);
       })
       .finally(() => {
-        // getMedicines();
+       
       });
   }
   function addLeadingZero(n) {
@@ -90,9 +90,6 @@ const ShareMedicine = (props) => {
         />
         <button className="button" id="btnAdd" type="submit">
           Add
-        </button>
-        <button className="button-cancel" id="btnCancel" onClick={handleCancel}>
-          Cancel
         </button>
       </form>
     </div>
