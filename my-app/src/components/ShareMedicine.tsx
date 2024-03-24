@@ -55,6 +55,9 @@ const ShareMedicine = (props) => {
       })
       .finally(() => {
         setIsLoading(false);
+        medicine_name.value="";
+        medicine_qty.value="";
+        
       });
   }
   function addLeadingZero(n) {
