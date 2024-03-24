@@ -2,10 +2,10 @@ import { Medicine } from "../api/types/medicine";
 import { useAuthContext } from "@asgardeo/auth-react";
 
 const PickMedicine = (props) => {
+  let selectedMed = props.selectedMed;
   const { getAccessToken } = useAuthContext();
 
-  async function handleButton(e) {
-    let selectedMed = props.selectedMed;
+  async function handleButton(e) {  
     console.log(selectedMed);
     const medicine_qty_field = document.getElementById(
       "medicine_qty"
@@ -54,7 +54,7 @@ const PickMedicine = (props) => {
           id="medicine_qty"
           defaultValue={1}
           min={1}
-          max={props?.selectedMed?.medicine_qty}
+          max={selectedMed?.medicine_qty}
           type="number"
           required
         />
