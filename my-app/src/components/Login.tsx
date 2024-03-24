@@ -1,6 +1,8 @@
-import logo from "./logo.svg";
+import logo from "../logo.svg";
+import "../App.css";
 import React, { useState, useEffect } from "react";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const {
@@ -12,10 +14,13 @@ const Login = () => {
     state,
   } = useAuthContext();
   const [signedIn, setSignedIn] = useState(false);
+  const navigate = useNavigate();
+
   function handleSignIn() {
     signIn()
       .then(() => {
         setSignedIn(true);
+        navigate("/home");
       })
       .catch((e) => {
         console.log(e);

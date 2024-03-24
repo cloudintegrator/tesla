@@ -8,7 +8,9 @@ const Share = () => {
   function onShareClick() {
     navigate("/share");
   }
-  function onLogoutClick() {}
+  function onLogoutClick() {
+    navigate("/");
+  }
   return (
     <body>
       <header>
