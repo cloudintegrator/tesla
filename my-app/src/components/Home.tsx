@@ -1,9 +1,23 @@
 import "../dashboard.css";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "@asgardeo/auth-react";
+import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
+import { useEffect, useState } from "react";
+
 const Home = () => {
-  const { signOut } = useAuthContext();
+  const { signOut, state, getBasicUserInfo } = useAuthContext();
+  const [user, setUser] = useState<BasicUserInfo | null>(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log("[Home] - Updating home page.");
+    if (state.isAuthenticated) {
+      console.log("[Home] - User is logged in.");
+      getBasicUserInfo().then((data) => {
+        setUser(data);
+        console.log("[Home] - Logged in user", user?.username);
+      });
+    }
+  }, []);
 
   function onHomeClick() {
     navigate("/home");
