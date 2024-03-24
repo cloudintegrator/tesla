@@ -5,7 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
-import PickMedicinePopup from "./PickMedicinePopup"
+import PickMedicinePopup from "./PickMedicinePopup";
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -171,54 +171,52 @@ const Home = () => {
             />
             <label>Mine</label>
           </div>
-          {/* <div className="report-container"> */}
           {medicines && (
-              <div>
-                <table className="container">
-                  <thead>
-                    <tr>
-                      {/* <th>ID</th> */}
-                      <th>Published By</th>
-                      <th>Published On</th>
-                      <th>Medicine Name</th>
-                      <th>Quantity</th>
-                      <th>Validity</th>
-                      <th>Acquire</th>
+            <div>
+              <table className="container">
+                <thead>
+                  <tr>
+                    {/* <th>ID</th> */}
+                    <th>Published By</th>
+                    <th>Published On</th>
+                    <th>Medicine Name</th>
+                    <th>Quantity</th>
+                    <th>Validity</th>
+                    <th>Acquire</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {medicines.map((obj, idx) => (
+                    <tr key={idx}>
+                      {/* <td>{obj.id}</td> */}
+                      <td>{obj.email}</td>
+                      <td>{obj.created?.toString()}</td>
+                      <td>{obj.medicine_name?.toUpperCase()}</td>
+                      <td>{obj.medicine_qty}</td>
+                      <td>{obj.medicine_validity?.toString()}</td>
+                      <td>
+                        {!seenPickMedPopup ? (
+                          <button
+                            className="button"
+                            onClick={() => togglePickMedicinePopup(obj)}
+                          >
+                            Pick
+                          </button>
+                        ) : null}
+                        {seenPickMedPopup && selectedMed?.id === obj.id ? (
+                          <PickMedicinePopup
+                            toggle={() => togglePickMedicinePopup(obj)}
+                          />
+                        ) : null}
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {medicines.map((obj, idx) => (
-                      <tr key={idx}>
-                        {/* <td>{obj.id}</td> */}
-                        <td>{obj.email}</td>
-                        <td>{obj.created?.toString()}</td>
-                        <td>{obj.medicine_name?.toUpperCase()}</td>
-                        <td>{obj.medicine_qty}</td>
-                        <td>{obj.medicine_validity?.toString()}</td>
-                        <td>
-                          {!seenPickMedPopup ? (
-                            <button
-                              className="button"
-                              onClick={() => togglePickMedicinePopup(obj)}
-                            >
-                              Pick
-                            </button>
-                          ) : null}
-                          {seenPickMedPopup && selectedMed?.id === obj.id ? (
-                            <PickMedicinePopup
-                              toggle={() => togglePickMedicinePopup(obj)}
-                            />
-                          ) : null}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
-      {/* </div> */}
+      </div>
     </>
   );
 };
