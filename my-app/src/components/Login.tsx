@@ -2,21 +2,21 @@ import logo from "../logo.svg";
 import "../App.css";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Login = ({ callBackLogin }) => {
-  const { signIn } = useAuthContext();
+  const { signIn, getBasicUserInfo, state } = useAuthContext();
   const navigate = useNavigate();
 
-  function handleSignIn() {
-    signIn()
-      .then(() => {
-        callBackLogin(true);
-        navigate("/home");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
+  useEffect(() => {
+    console.log("Login page updating...");
+    if (state.isAuthenticated) {
+      console.log("User logged in...");
+      callBackLogin(true);
+      navigate("/home");
+    }
+  });
+
   return (
     <div>
       <header className="App-header">
@@ -29,7 +29,7 @@ const Login = ({ callBackLogin }) => {
           </a>
         </h3>
         <img src={logo} className="App-logo" alt="logo" />
-        <button className="pill-btn" onClick={handleSignIn}>
+        <button className="pill-btn" onClick={()=>{signIn()}}>
           Login
         </button>
       </header>
