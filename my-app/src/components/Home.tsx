@@ -1,11 +1,20 @@
 import "../dashboard.css";
+import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
+import { Medicine } from "../api/types/medicine";
+import { getMedicines as gm } from "../api/medicines/get-medicines";
+import PickMedicinePopup from "./PickMedicinePopup"
 
 const Home = () => {
-  const { signOut, state, getBasicUserInfo } = useAuthContext();
+  const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
   const [user, setUser] = useState<BasicUserInfo | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [medicines, setMedicines] = useState<Medicine[] | null>(null);
+  const [includeMine, setIncludeMine] = useState(true);
+  const [seenPickMedPopup, setSeenPickMedPopup] = useState(false);
+  const [selectedMed, setSelectedMed] = useState<Medicine | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,10 +24,57 @@ const Home = () => {
       getBasicUserInfo().then((data) => {
         setUser(data);
         console.log("[Home] - Logged in user", user?.username);
+        getMedicines();
       });
     }
   }, []);
 
+  async function getMedicines() {
+    let flag = state.isAuthenticated;
+    let accessToken = await getAccessToken();
+    let user = await getBasicUserInfo();
+    if (flag) {
+      setIsLoading(true);
+      gm(accessToken)
+        .then((res) => {
+          let data = res.data;
+          let temp: Medicine[] = populateRows(includeMine, user, data);
+          setMedicines(temp);
+          setIsLoading(false);
+        })
+        .catch((e) => {
+          getMedicines();
+        });
+    }
+  }
+  function populateRows(
+    includeMine: Boolean,
+    user: BasicUserInfo | null,
+    data: Medicine[]
+  ) {
+    let temp: Medicine[] = [];
+    if (includeMine) {
+      data.forEach((d) => {
+        d.created = d.created?.substring(0, 10);
+        d.medicine_validity = d.medicine_validity?.substring(0, 10);
+        temp.push(d);
+      });
+    } else {
+      data.forEach((d) => {
+        if (d.email !== user?.username) {
+          d.created = d.created?.substring(0, 10);
+          d.medicine_validity = d.medicine_validity?.substring(0, 10);
+          temp.push(d);
+        }
+      });
+    }
+    return temp;
+  }
+  function togglePickMedicinePopup(med) {
+    console.log(med.id);
+    setSelectedMed(med);
+    setSeenPickMedPopup(!seenPickMedPopup);
+  }
   function onHomeClick() {
     navigate("/home");
   }
@@ -103,11 +159,66 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="report-container">
-            <h1>Med List</h1>
+          <div>
+            <input
+              type="checkbox"
+              id="isMine"
+              name="Mine"
+              checked={includeMine}
+              onChange={(e) => {
+                setIncludeMine(!includeMine);
+              }}
+            />
+            <label>Mine</label>
+          </div>
+          {/* <div className="report-container"> */}
+          {medicines && (
+              <div>
+                <table className="container">
+                  <thead>
+                    <tr>
+                      {/* <th>ID</th> */}
+                      <th>Published By</th>
+                      <th>Published On</th>
+                      <th>Medicine Name</th>
+                      <th>Quantity</th>
+                      <th>Validity</th>
+                      <th>Acquire</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {medicines.map((obj, idx) => (
+                      <tr key={idx}>
+                        {/* <td>{obj.id}</td> */}
+                        <td>{obj.email}</td>
+                        <td>{obj.created?.toString()}</td>
+                        <td>{obj.medicine_name?.toUpperCase()}</td>
+                        <td>{obj.medicine_qty}</td>
+                        <td>{obj.medicine_validity?.toString()}</td>
+                        <td>
+                          {!seenPickMedPopup ? (
+                            <button
+                              className="button"
+                              onClick={() => togglePickMedicinePopup(obj)}
+                            >
+                              Pick
+                            </button>
+                          ) : null}
+                          {seenPickMedPopup && selectedMed?.id === obj.id ? (
+                            <PickMedicinePopup
+                              toggle={() => togglePickMedicinePopup(obj)}
+                            />
+                          ) : null}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 };
