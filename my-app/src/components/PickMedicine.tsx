@@ -1,7 +1,7 @@
 import { Medicine } from "../api/types/medicine";
 import { useAuthContext } from "@asgardeo/auth-react";
 
-const PickMedicinePopup = (props) => {
+const PickMedicine = (props) => {
   const { getAccessToken } = useAuthContext();
 
   async function handleButton(e) {
@@ -84,4 +84,4 @@ const PickMedicinePopup = (props) => {
   );
 };
 
-export default PickMedicinePopup;
+export default PickMedicine;

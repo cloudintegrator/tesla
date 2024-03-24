@@ -5,7 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
-import PickMedicinePopup from "./PickMedicinePopup";
+import PickMedicine from "./PickMedicine";
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -205,7 +205,7 @@ const Home = () => {
                           </button>
                         ) : null}
                         {seenPickMedPopup && selectedMed?.id === obj.id ? (
-                          <PickMedicinePopup
+                          <PickMedicine
                             toggle={() => togglePickMedicinePopup(obj)}
                           />
                         ) : null}
