@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const Share = () => {
   const navigate = useNavigate();
   function onHomeClick() {
-    navigate("/");
+    navigate("/home");
   }
   function onShareClick() {
     navigate("/share");
@@ -21,8 +21,6 @@ const Share = () => {
             alt="menu-icon"
           />
         </div>
-
-        
       </header>
 
       <div className="main-container">

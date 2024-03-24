@@ -1,10 +1,10 @@
 import "../dashboard.css";
 import { useNavigate } from "react-router-dom";
-const Dashboard = () => {
+const Home = () => {
   const navigate = useNavigate();
 
   function onHomeClick() {
-    navigate("/");
+    navigate("/home");
   }
 
   function onShareClick() {
@@ -82,4 +82,4 @@ const Dashboard = () => {
     </body>
   );
 };
-export default Dashboard;
+export default Home;
