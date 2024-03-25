@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
 import { search } from "../api/medicines/search-medicines";
+import { deleteMedicine } from "../api/medicines/delete-medicine";
+
 import PickMedicine from "./PickMedicine";
 
 const Home = () => {
@@ -96,8 +98,15 @@ const Home = () => {
       });
   }
 
-  async function handleDeleteMedicine() {
-    alert("TODO");
+  async function handleDeleteMedicine(med) {
+    let token = await getAccessToken();
+    deleteMedicine(token, med)
+      .then(() => {
+        getMedicines();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   function onHomeClick() {
@@ -176,7 +185,7 @@ const Home = () => {
         <div className="main">
           <div className="searchbar">
             <input id="search-medicine-name" type="text" placeholder="Search" />
-            <div className="searchbtn" onClick={handleSearchMedicine} >
+            <div className="searchbtn" onClick={handleSearchMedicine}>
               <img
                 src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
                 className="icn srchicn"
@@ -237,7 +246,12 @@ const Home = () => {
                             }
                           />
                         ) : null}
-                        <button className="button-cancel" onClick={handleDeleteMedicine} >Delete</button>
+                        <button
+                          className="button-cancel"
+                          onClick={() => handleDeleteMedicine(obj)}
+                        >
+                          Delete
+                        </button>
                       </td>
                     </tr>
                   ))}
