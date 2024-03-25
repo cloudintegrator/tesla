@@ -41,6 +41,15 @@ public class MedDataService {
         }
     }
 
+    @RabbitListener(queues = "DELETE.MEDICINE.QUEUE")
+    public void handleDeleteMedicine(final MedDataDTO med) {
+        try {
+            medDataRepository.deleteById(med.id);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
+    }
+
     public List<MedDataDTO> getMedicines() {
         List<MedDataEntity> list = medDataRepository.findByExpired(false);
         final List<MedDataDTO> result = new ArrayList<>();

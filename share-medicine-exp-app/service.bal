@@ -14,7 +14,7 @@ public type Medicine record{|
 |};
 
 public type Response record{
-    int status;
+    int code;
     string message;
 };
 
@@ -44,7 +44,7 @@ service / on new http:Listener(9090) {
 
     resource function get health() returns Response|error{
         Response r={
-            status: 200,
+            code: 200,
             message: "Up & Running."
         };
         return r;
@@ -58,7 +58,7 @@ service / on new http:Listener(9090) {
 
         log:printInfo("********** Medicine information posted successfully **********");
         Response r={
-            status: 201,
+            code: 201,
             message: "Sent data to Rabbit MQ"
         };
         return r;
@@ -101,8 +101,23 @@ service / on new http:Listener(9090) {
 
         log:printInfo("********** Picked Medicine information posted successfully **********");
         Response r={
-            status: 201,
+            code: 201,
             message: "Sent data to Rabbit MQ"
+        };
+        return r;
+    }
+
+    resource function post deletemed(Medicine medicine) returns Response|error{
+        check self.mqClient->publishMessage({
+            content: medicine,
+            routingKey: "DELETE.MEDICINE.QUEUE"
+        });
+
+        log:printInfo("********** Medicine information posted successfully for deletion **********");
+       
+        Response r={
+            code: 201,
+            message: "Success"
         };
         return r;
     }
