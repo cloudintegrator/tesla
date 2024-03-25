@@ -4,7 +4,7 @@ import { pickMedicine } from "../api/medicines/pick-medicine";
 
 
 const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
-  const { getAccessToken } = useAuthContext();
+  const { getAccessToken,getBasicUserInfo } = useAuthContext();
 
   async function handleButton(e) {
     console.log(selectedMed);
@@ -17,6 +17,8 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
     let actual_qty = selectedMed?.medicine_qty;
     let msg = msg_field.value;
 
+    const user=await getBasicUserInfo();
+
     if (medicine_qty !== 0 && medicine_qty <= actual_qty!) {
       let temp: Medicine = {
         id: selectedMed?.id,
@@ -26,6 +28,7 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
         medicine_validity: selectedMed?.medicine_validity,
         expired: selectedMed?.expired,
         msg: msg,
+        send_to: user.email
       };
 
       const token = await getAccessToken();

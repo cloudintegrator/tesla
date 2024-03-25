@@ -11,6 +11,7 @@ public type Medicine record{|
     string medicine_validity;
     boolean expired;
     string msg?;
+    string send_to?;
 |};
 
 public type Response record{

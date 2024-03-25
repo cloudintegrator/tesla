@@ -6,5 +6,6 @@ export interface Medicine {
     medicine_qty?: number;
     medicine_validity?: string;
     expired?: boolean,
-    msg?:string
+    msg?:string;
+    send_to?:string;
   }

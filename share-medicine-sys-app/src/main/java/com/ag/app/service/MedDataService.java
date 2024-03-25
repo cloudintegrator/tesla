@@ -60,7 +60,7 @@ public class MedDataService {
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
                     item.getMedicine_validity(),
-                    item.getExpired(), ""));
+                    item.getExpired(), "",""));
         });
         return result;
     }
@@ -75,7 +75,7 @@ public class MedDataService {
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
                     item.getMedicine_validity(),
-                    item.getExpired(), ""));
+                    item.getExpired(), "",""));
         });
         return result;
     }
@@ -110,7 +110,8 @@ public class MedDataService {
                              @JsonProperty("medicine_qty") Integer medicine_qty,
                              @JsonProperty("medicine_validity") Date medicine_validity,
                              @JsonProperty("expired") Boolean expired,
-                             @JsonProperty("msg") String msg) implements Serializable {
+                             @JsonProperty("msg") String msg,
+                             @JsonProperty("send_to") String send_to) implements Serializable {
 
     }
 
