@@ -27,7 +27,7 @@ const ShareMedicine = (props) => {
     let created_date_year = created_date.getFullYear();
 
     let x = new Date(medicine_validity.value);
-    let m = addLeadingZero(x.getMonth());
+    let m = addLeadingZero(x.getMonth()+1);
     let d = addLeadingZero(x.getDate());
     let y = x.getFullYear();
 
