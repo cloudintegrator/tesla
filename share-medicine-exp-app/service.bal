@@ -123,4 +123,21 @@ service / on new http:Listener(9090) {
         return r;
     }
 
+     resource function get messages(string token,string email) returns Medicine[]|error{
+        string path= SYS_APP_BASEPATH + "/medicines/messages";
+        string params="email="+email;
+        string fullPath=path+"?"+params;
+
+        log:printInfo("Token: "+token);
+        log:printInfo("Full Path: "+fullPath);
+        map<string|string> headers={
+            "Authorization": "Bearer " + token
+        };
+
+        http:Client httpClient = check new (SYS_APP_HOST);
+        Medicine[] med=check httpClient-> get(fullPath,headers);
+        log:printInfo("********** MESSAGES **********"+med.toJsonString());
+        return med;
+    }
+
 }

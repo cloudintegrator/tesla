@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -59,7 +60,7 @@ public class PickedMedDataService {
         List<MedDataService.MedDataDTO> result = new ArrayList<>();
         list.stream().forEach((item) -> {
             result.add(new MedDataService.MedDataDTO(0, item.getEmail(),
-                    null,
+                    new Date(),
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
                     item.getMedicine_validity(),
