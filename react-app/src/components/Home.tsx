@@ -246,7 +246,7 @@ const Home = () => {
                             }
                           />
                         ) : null}
-                        {obj.email === user?.username ? (
+                        {(obj.email === user?.username && !seenPickMedPopup) ? (
                           <button
                             className="button-cancel"
                             onClick={() => handleDeleteMedicine(obj)}
