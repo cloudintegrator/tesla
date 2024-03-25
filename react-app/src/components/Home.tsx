@@ -230,7 +230,7 @@ const Home = () => {
                       <td>{obj.medicine_qty}</td>
                       <td>{obj.medicine_validity?.toString()}</td>
                       <td>
-                        {!seenPickMedPopup ? (
+                        {!seenPickMedPopup && user?.username !==obj.email ? (
                           <button
                             className="button"
                             onClick={() => togglePickMedicinePopup(obj)}
