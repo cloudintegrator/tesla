@@ -246,12 +246,14 @@ const Home = () => {
                             }
                           />
                         ) : null}
-                        <button
-                          className="button-cancel"
-                          onClick={() => handleDeleteMedicine(obj)}
-                        >
-                          Delete
-                        </button>
+                        {obj.email === user?.username ? (
+                          <button
+                            className="button-cancel"
+                            onClick={() => handleDeleteMedicine(obj)}
+                          >
+                            Delete
+                          </button>
+                        ) : null}
                       </td>
                     </tr>
                   ))}
