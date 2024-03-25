@@ -116,6 +116,10 @@ const Home = () => {
   function onShareClick() {
     navigate("/share");
   }
+
+  function onMessagesClick() {
+    navigate("/messages");
+  }
   function onLogoutClick() {
     signOut();
   }
@@ -167,6 +171,17 @@ const Home = () => {
                   alt="share"
                 />
                 <h4>Share</h4>
+              </div>
+              <div
+                className="option2 nav-option"
+                onClick={() => onMessagesClick()}
+              >
+                <img
+                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                  className="nav-img"
+                  alt="share"
+                />
+                <h4>Messages</h4>
               </div>
               <div
                 className="nav-option logout"
@@ -230,7 +245,7 @@ const Home = () => {
                       <td>{obj.medicine_qty}</td>
                       <td>{obj.medicine_validity?.toString()}</td>
                       <td>
-                        {!seenPickMedPopup && user?.username !==obj.email ? (
+                        {!seenPickMedPopup && user?.username !== obj.email ? (
                           <button
                             className="button"
                             onClick={() => togglePickMedicinePopup(obj)}
@@ -246,7 +261,7 @@ const Home = () => {
                             }
                           />
                         ) : null}
-                        {(obj.email === user?.username && !seenPickMedPopup) ? (
+                        {obj.email === user?.username && !seenPickMedPopup ? (
                           <button
                             className="button-cancel"
                             onClick={() => handleDeleteMedicine(obj)}

@@ -1,14 +1,14 @@
 import "../dashboard.css";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "@asgardeo/auth-react";
+import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
-import ShareMedicine from "./ShareMedicine";
 
-const Share = () => {
+
+const Messages = () => {
   const { signOut, state, getBasicUserInfo } = useAuthContext();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<BasicUserInfo|null>(null);
 
   useEffect(() => {
     console.log("[Share] - Updating Share page...");
@@ -27,7 +27,7 @@ const Share = () => {
   function onShareClick() {
     navigate("/share");
   }
-  function onMessagesClick() {
+  function onMessagesClick(){
     navigate("/messages");
   }
   function onLogoutClick() {
@@ -109,11 +109,11 @@ const Share = () => {
         </div>
         <div className="main">
           <div className="report-container">
-            <ShareMedicine />
+            <h1>TODO</h1>
           </div>
         </div>
       </div>
     </>
   );
 };
-export default Share;
+export default Messages;
