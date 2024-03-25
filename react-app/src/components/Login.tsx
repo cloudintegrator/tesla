@@ -16,6 +16,13 @@ const Login = ({ callBackLogin }) => {
       navigate("/home");
     }
   });
+  const handleSignIn = () => {
+    signIn()
+      .then(() => {})
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div>
@@ -29,12 +36,7 @@ const Login = ({ callBackLogin }) => {
           </a>
         </h3>
         <img src={logo} className="App-logo" alt="logo" />
-        <button
-          className="pill-btn"
-          onClick={() => {
-            signIn();
-          }}
-        >
+        <button className="pill-btn" onClick={handleSignIn}>
           Login
         </button>
       </header>
