@@ -199,12 +199,12 @@ const Home = () => {
                 <thead>
                   <tr>
                     {/* <th>ID</th> */}
-                    <th>Published By</th>
-                    <th>Published On</th>
-                    <th>Medicine Name</th>
-                    <th>Quantity</th>
-                    <th>Validity</th>
-                    <th>Acquire</th>
+                    <th>PUBLISHED BY</th>
+                    <th>PUBLISHED ON</th>
+                    <th>MEDICINE NAME</th>
+                    <th>QUANTITY</th>
+                    <th>VALIDITY</th>
+                    <th>GET IT?</th>
                   </tr>
                 </thead>
                 <tbody>
