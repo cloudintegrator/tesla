@@ -96,6 +96,10 @@ const Home = () => {
       });
   }
 
+  async function handleDeleteMedicine() {
+    alert("TODO");
+  }
+
   function onHomeClick() {
     navigate("/home");
   }
@@ -233,6 +237,7 @@ const Home = () => {
                             }
                           />
                         ) : null}
+                        <button className="button-cancel" onClick={handleDeleteMedicine} >Delete</button>
                       </td>
                     </tr>
                   ))}
