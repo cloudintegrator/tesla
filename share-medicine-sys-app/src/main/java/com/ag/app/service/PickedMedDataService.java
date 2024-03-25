@@ -43,6 +43,7 @@ public class PickedMedDataService {
             entity.setMedicine_validity(medDataDTO.medicine_validity());
             entity.setExpired(medDataDTO.expired());
             entity.setMsg(medDataDTO.msg());
+            entity.setSend_to(medDataDTO.send_to());
             entity = pickedMedDataRepository.save(entity);
             System.out.println("Medicine pickup record created with id:" + entity.getId());
         } catch (Exception e) {
