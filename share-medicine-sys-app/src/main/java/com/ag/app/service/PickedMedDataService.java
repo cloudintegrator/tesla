@@ -8,6 +8,9 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class PickedMedDataService {
 
@@ -49,6 +52,22 @@ public class PickedMedDataService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<MedDataService.MedDataDTO> getMessages(String email) {
+        List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email);
+        List<MedDataService.MedDataDTO> result = new ArrayList<>();
+        list.stream().forEach((item) -> {
+            result.add(new MedDataService.MedDataDTO(0, item.getEmail(),
+                    null,
+                    item.getMedicine_name(),
+                    item.getMedicine_qty(),
+                    item.getMedicine_validity(),
+                    item.getExpired(),
+                    item.getMsg(),
+                    item.getSend_to()));
+        });
+        return result;
     }
 
 }
