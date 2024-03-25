@@ -5,6 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
+import { search } from "../api/medicines/search-medicines";
 import PickMedicine from "./PickMedicine";
 
 const Home = () => {
@@ -75,6 +76,26 @@ const Home = () => {
     setSelectedMed(med);
     setSeenPickMedPopup(!seenPickMedPopup);
   }
+
+  async function handleSearchMedicine() {
+    setIsLoading(true);
+    const input_elm = document.getElementById(
+      "search-medicine-name"
+    ) as HTMLInputElement;
+    console.log(input_elm.value);
+    let token = await getAccessToken();
+    search(token, input_elm.value)
+      .then((res) => {
+        let data = res.data;
+        let temp: Medicine[] = populateRows(includeMine, user, data);
+        setMedicines(temp);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }
+
   function onHomeClick() {
     navigate("/home");
   }
@@ -150,8 +171,8 @@ const Home = () => {
         </div>
         <div className="main">
           <div className="searchbar">
-            <input type="text" placeholder="Search" />
-            <div className="searchbtn">
+            <input id="search-medicine-name" type="text" placeholder="Search" />
+            <div className="searchbtn" onClick={handleSearchMedicine} >
               <img
                 src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
                 className="icn srchicn"
