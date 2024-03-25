@@ -86,6 +86,14 @@ public class MedDataService {
         });
     }
 
+    public void deleteMedicine(Integer id) {
+        try {
+            medDataRepository.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public record MedDataDTO(@JsonProperty("id") Integer id,
                              @JsonProperty("email") String email,
                              @JsonProperty("created") Date created,

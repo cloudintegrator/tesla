@@ -42,6 +42,12 @@ public class MedController {
         return new Response(201, "Success");
     }
 
+    @DeleteMapping("/medicines")
+    public Response deleteMedicine(@RequestParam Integer id) {
+        medDataService.deleteMedicine(id);
+        return new Response(202, "Success");
+    }
+
     @GetMapping("/trigger")
     public Response updateExpiry() {
         medDataService.updateExpiry();
