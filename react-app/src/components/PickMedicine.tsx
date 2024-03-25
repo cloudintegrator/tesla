@@ -28,7 +28,7 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
         medicine_validity: selectedMed?.medicine_validity,
         expired: selectedMed?.expired,
         msg: msg,
-        send_to: user.email
+        send_to: user.username
       };
 
       const token = await getAccessToken();
