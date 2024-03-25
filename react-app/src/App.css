@@ -88,7 +88,7 @@ h2 a {
 
 .container th h1 {
   font-weight: bold;
-  font-size: 3ch;
+  font-size: ch;
   text-align: left;
   color: #e2e6ee;
 }
@@ -131,7 +131,7 @@ h2 a {
   background-color: #d5e7e5;
 }
 
-.container td:first-child {
+.container td {
   color: #000000;
 }
 
@@ -143,8 +143,8 @@ h2 a {
 }
 
 .container td:hover {
-  background-color: #fff842;
-  color: #b8c9ec;
+  background-color: #b8c9ec;
+  color: #ffffff;
   font-weight: bold;
 
   box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
