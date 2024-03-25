@@ -1,17 +1,17 @@
 import { Medicine } from "../api/types/medicine";
 import { useAuthContext } from "@asgardeo/auth-react";
+import { pickMedicine } from "../api/medicines/pick-medicine";
 
-const PickMedicine = (props) => {
-  let selectedMed = props.selectedMed;
+
+const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
   const { getAccessToken } = useAuthContext();
 
-  async function handleButton(e) {  
+  async function handleButton(e) {
     console.log(selectedMed);
     const medicine_qty_field = document.getElementById(
       "medicine_qty"
     ) as HTMLInputElement;
     const msg_field = document.getElementById("msg") as HTMLTextAreaElement;
-    const popup = document.getElementById("snackbar") as HTMLElement;
 
     let medicine_qty = Number(medicine_qty_field.value);
     let actual_qty = selectedMed?.medicine_qty;
@@ -28,18 +28,14 @@ const PickMedicine = (props) => {
         msg: msg,
       };
 
-    //   const token = await getAccessToken();
-    //   pickMedicine(token, temp)
-    //     .then((res) => {
-    //       popup.className = "show";
-    //       setTimeout(() => {
-    //         popup.className = popup.className.replace("show", "");
-    //         getMedicines();
-    //       }, 5000);
-    //     })
-    //     .finally(() => {});
+      const token = await getAccessToken();
+      pickMedicine(token, temp)
+        .then((res) => {
+          console.log("[PickMedicine] - Medicine has been picked up.")
+        })
+        .finally(() => {});
     }
-    props.toggle();
+    callBackPickMedicine();
   }
   return (
     <div>
@@ -67,14 +63,14 @@ const PickMedicine = (props) => {
         />
         <br></br>
         <br></br>
-        <button className="button" id="btnAdd" type="submit">
+        <button className="button" id="btnAdd" type="submit" onClick={handleButton} >
           Add
         </button>
         <button
           className="button-cancel"
           id="btnCancel"
           onClick={(e) => {
-            props.toggle();
+            callBackPickMedicine();
           }}
         >
           Cancel

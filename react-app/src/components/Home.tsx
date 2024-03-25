@@ -7,7 +7,6 @@ import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
 import PickMedicine from "./PickMedicine";
 
-
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
   const [user, setUser] = useState<BasicUserInfo | null>(null);
@@ -207,7 +206,10 @@ const Home = () => {
                         ) : null}
                         {seenPickMedPopup && selectedMed?.id === obj.id ? (
                           <PickMedicine
-                            toggle={() => togglePickMedicinePopup(obj)}
+                            selectedMed={obj}
+                            callBackPickMedicine={() =>
+                              togglePickMedicinePopup(obj)
+                            }
                           />
                         ) : null}
                       </td>
