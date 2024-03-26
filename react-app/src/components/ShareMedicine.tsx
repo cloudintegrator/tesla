@@ -18,8 +18,8 @@ const ShareMedicine = (props) => {
     const medicine_validity = document.getElementById(
       "medicine_validity"
     ) as HTMLInputElement;
-    const btnAdd = document.getElementById("btnAdd") as HTMLButtonElement;
-    btnAdd.disabled = true;
+    
+    
 
     let created_date = new Date();
     let created_date_day = addLeadingZero(created_date.getDate());
