@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PickedMedDataService {
@@ -34,31 +33,40 @@ public class PickedMedDataService {
 
     public void save(MedDataService.MedDataDTO medDataDTO) {
         try {
+            // Check if exists:
+            PickedMedDataEntity entity = null;
+            entity = pickedMedDataRepository.findByEmailAndMed(medDataDTO.email(), medDataDTO.id());
+            if (null != entity) {
+                Integer temp = entity.getMedicine_qty() + medDataDTO.medicine_qty();
+                pickedMedDataRepository.updateQtyMsg(entity.getId(), temp, medDataDTO.msg());
+            } else {
+                // Save the picked medicine data.
+                entity = new PickedMedDataEntity();
+                entity.setEmail(medDataDTO.email());
+                entity.setMedicine_name(medDataDTO.medicine_name());
+                entity.setMedicine_qty(medDataDTO.medicine_qty());
+                entity.setMedicine_validity(medDataDTO.medicine_validity());
+                entity.setExpired(medDataDTO.expired());
+                entity.setMsg(medDataDTO.msg());
+                entity.setSend_to(medDataDTO.send_to());
+                entity.setMed_id(medDataDTO.id());
+                entity.setDeal(false);
+                entity = pickedMedDataRepository.save(entity);
+                System.out.println("Medicine pickup record created with id:" + entity.getId());
+            }
+
             // Deduct qty.
             MedDataEntity medDataEntity = medDataRepository.findById(medDataDTO.id()).get();
             Integer qty = medDataEntity.getMedicine_qty();
             qty = qty - medDataDTO.medicine_qty();
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
-
-            // Save the picked medicine data.
-            PickedMedDataEntity entity = new PickedMedDataEntity();
-            entity.setEmail(medDataDTO.email());
-            entity.setMedicine_name(medDataDTO.medicine_name());
-            entity.setMedicine_qty(medDataDTO.medicine_qty());
-            entity.setMedicine_validity(medDataDTO.medicine_validity());
-            entity.setExpired(medDataDTO.expired());
-            entity.setMsg(medDataDTO.msg());
-            entity.setSend_to(medDataDTO.send_to());
-            entity.setMed_id(medDataDTO.id());
-            entity = pickedMedDataRepository.save(entity);
-            System.out.println("Medicine pickup record created with id:" + entity.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public List<MedDataService.MedDataDTO> getMessages(String email) {
-        List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email);
+        List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email,false);
         List<MedDataService.MedDataDTO> result = new ArrayList<>();
         list.stream().forEach((item) -> {
             result.add(new MedDataService.MedDataDTO(item.getId(),
@@ -82,8 +90,8 @@ public class PickedMedDataService {
             qty = qty + medDataDTO.medicine_qty();
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
         } else {
-            Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
-
+            PickedMedDataEntity entity = pickedMedDataRepository.findByEmailAndMed(medDataDTO.email(), medDataDTO.id());
+            pickedMedDataRepository.updateDeal(entity.getId(), true);
         }
 
     }

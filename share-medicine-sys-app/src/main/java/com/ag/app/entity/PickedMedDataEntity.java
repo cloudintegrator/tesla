@@ -20,6 +20,7 @@ public class PickedMedDataEntity {
     private String msg;
     private String send_to;
     private Integer med_id;
+    private Boolean deal;
 
     public Integer getId() {
         return id;
@@ -91,5 +92,13 @@ public class PickedMedDataEntity {
 
     public void setMed_id(Integer med_id) {
         this.med_id = med_id;
+    }
+
+    public Boolean getDeal() {
+        return deal;
+    }
+
+    public void setDeal(Boolean deal) {
+        this.deal = deal;
     }
 }

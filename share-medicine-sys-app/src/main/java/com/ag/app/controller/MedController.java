@@ -60,9 +60,9 @@ public class MedController {
     }
 
     @PostMapping("/medicines/approve")
-    public Response approveMedicine(@RequestBody MedDataService.MedDataDTO medDataDTO){
-
-        return new Response(201,"Success");
+    public Response approveMedicine(@RequestBody MedDataService.MedDataDTO medDataDTO) {
+        pickedMedDataService.approveMedicine(medDataDTO);
+        return new Response(201, "Success");
     }
 
     @PostMapping("/cmd")
