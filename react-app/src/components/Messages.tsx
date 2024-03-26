@@ -132,9 +132,24 @@ const Messages = () => {
             {messages && (
               <table>
                 <tbody>
-                  {messages.map((obj,idx)=>(
+                  {messages.map((obj, idx) => (
                     <tr key={idx}>
-                      <td>{obj.medicine_name}</td>
+                      <td>
+                        <div className="card">
+                          <div className="container">
+                            <h5>
+                              <b>{obj.email}</b>
+                            </h5>
+                            <h5>
+                              <b>{obj.medicine_name}</b>
+                            </h5>
+                            <h5>
+                              <b>{obj.medicine_qty}</b>
+                            </h5>
+                            <p>{obj.msg}</p>
+                          </div>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
