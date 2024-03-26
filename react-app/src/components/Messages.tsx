@@ -108,7 +108,7 @@ const Messages = () => {
           </nav>
         </div>
         <div className="main">
-          <div className="report-container">
+          <div className="message-container">
             <h1>TODO</h1>
           </div>
         </div>

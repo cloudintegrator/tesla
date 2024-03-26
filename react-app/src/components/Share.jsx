@@ -108,7 +108,7 @@ const Share = () => {
           </nav>
         </div>
         <div className="main">
-          <div className="report-container">
+          <div className="share-container">
             <ShareMedicine />
           </div>
         </div>
