@@ -128,7 +128,7 @@ const Messages = () => {
         <div className="main">
           <div className="message-container">
             {isLoading && <div className="loader"></div>}
-            <h1>TODO</h1>
+            <h1>Messages</h1>
             {messages && (
               <table>
                 <tbody>
@@ -138,13 +138,13 @@ const Messages = () => {
                         <div className="card">
                           <div className="container">
                             <h5>
-                              <b>{obj.email}</b>
+                              <b>Requester:{obj.email}</b>
                             </h5>
+                            <h6>
+                              <b>Medicine: {obj.medicine_name}</b>
+                            </h6>
                             <h5>
-                              <b>{obj.medicine_name}</b>
-                            </h5>
-                            <h5>
-                              <b>{obj.medicine_qty}</b>
+                              <b>Qty: {obj.medicine_qty}</b>
                             </h5>
                             <p>{obj.msg}</p>
                           </div>
