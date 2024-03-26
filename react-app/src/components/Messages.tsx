@@ -79,7 +79,7 @@ const Messages = () => {
               alt="dp"
             />
           </div>
-          <h2>{user?.displayName}</h2>
+          <h1>{user?.displayName}</h1>
         </div>
       </header>
 
