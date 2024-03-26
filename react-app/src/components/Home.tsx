@@ -7,9 +7,10 @@ import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
 import { search } from "../api/medicines/search-medicines";
 import { deleteMedicine } from "../api/medicines/delete-medicine";
-import message_icon from "../icon/messages.png"
-
 import PickMedicine from "./PickMedicine";
+import message_icon from "../icon/messages.png"
+import share_icon from "../icon/share.png"
+import home_icon from "../icon/home.png"
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -162,7 +163,7 @@ const Home = () => {
             <div className="nav-upper-options">
               <div className="nav-option" onClick={() => onHomeClick()}>
                 <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+                  src={home_icon}
                   className="nav-img"
                   alt="home"
                 />
@@ -174,7 +175,7 @@ const Home = () => {
                 onClick={() => onShareClick()}
               >
                 <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                  src={share_icon}
                   className="nav-img"
                   alt="share"
                 />
