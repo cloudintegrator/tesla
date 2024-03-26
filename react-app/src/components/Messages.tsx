@@ -136,16 +136,16 @@ const Messages = () => {
                     <tr key={idx}>
                       <td>
                         <div className="card">
-                          <div className="container">
-                            <h5>
+                          <div className="card-container">
+                            <h4>
                               <b>Requester:{obj.email}</b>
-                            </h5>
-                            <h6>
+                            </h4>
+                            <h4>
                               <b>Medicine: {obj.medicine_name}</b>
-                            </h6>
-                            <h5>
+                            </h4>
+                            <h4>
                               <b>Qty: {obj.medicine_qty}</b>
-                            </h5>
+                            </h4>
                             <p>{obj.msg}</p>
                           </div>
                         </div>
