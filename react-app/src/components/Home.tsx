@@ -8,9 +8,9 @@ import { getMedicines as gm } from "../api/medicines/get-medicines";
 import { search } from "../api/medicines/search-medicines";
 import { deleteMedicine } from "../api/medicines/delete-medicine";
 import PickMedicine from "./PickMedicine";
-import message_icon from "../icon/messages.png"
-import share_icon from "../icon/share.png"
-import home_icon from "../icon/home.png"
+import message_icon from "../icon/messages.png";
+import share_icon from "../icon/share.png";
+import home_icon from "../icon/home.png";
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -162,11 +162,7 @@ const Home = () => {
           <nav className="nav">
             <div className="nav-upper-options">
               <div className="nav-option" onClick={() => onHomeClick()}>
-                <img
-                  src={home_icon}
-                  className="nav-img"
-                  alt="home"
-                />
+                <img src={home_icon} className="nav-img" alt="home" />
                 <h4>Home</h4>
               </div>
 
@@ -174,22 +170,14 @@ const Home = () => {
                 className="option2 nav-option"
                 onClick={() => onShareClick()}
               >
-                <img
-                  src={share_icon}
-                  className="nav-img"
-                  alt="share"
-                />
+                <img src={share_icon} className="nav-img" alt="share" />
                 <h4>Share</h4>
               </div>
               <div
                 className="option2 nav-option"
                 onClick={() => onMessagesClick()}
               >
-                <img
-                  src={message_icon}
-                  className="nav-img"
-                  alt="share"
-                />
+                <img src={message_icon} className="nav-img" alt="share" />
                 <h4>Messages</h4>
               </div>
               <div

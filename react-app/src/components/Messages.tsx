@@ -5,6 +5,9 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import { getMessages } from "../api/medicines/get-messages";
 import { Medicine } from "../api/types/medicine";
+import message_icon from "../icon/messages.png";
+import share_icon from "../icon/share.png";
+import home_icon from "../icon/home.png";
 
 const Messages = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -88,11 +91,7 @@ const Messages = () => {
           <nav className="nav">
             <div className="nav-upper-options">
               <div className="nav-option" onClick={() => onHomeClick()}>
-                <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
-                  className="nav-img"
-                  alt="home"
-                />
+                <img src={home_icon} className="nav-img" alt="home" />
                 <h4>Home</h4>
               </div>
 
@@ -100,22 +99,14 @@ const Messages = () => {
                 className="option2 nav-option"
                 onClick={() => onShareClick()}
               >
-                <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
-                  className="nav-img"
-                  alt="share"
-                />
+                <img src={share_icon} className="nav-img" alt="share" />
                 <h4>Share</h4>
               </div>
               <div
                 className="option2 nav-option"
                 onClick={() => onMessagesClick()}
               >
-                <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
-                  className="nav-img"
-                  alt="share"
-                />
+                <img src={message_icon} className="nav-img" alt="share" />
                 <h4>Messages</h4>
               </div>
               <div
