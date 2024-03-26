@@ -303,7 +303,8 @@ h2 a {
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: auto;
+  margin: auto;
+  width: 80%;
   background-color: rgb(206, 233, 244);
 }
 
@@ -313,7 +314,7 @@ h2 a {
 
 .card-container {
   height: auto;
-  padding: 2px 16px;
+  padding: 3px 16px;
 }
 
 @-webkit-keyframes fadein {

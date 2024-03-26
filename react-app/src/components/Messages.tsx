@@ -136,11 +136,11 @@ const Messages = () => {
             {isLoading && <div className="loader"></div>}
             <h1>Messages</h1>
             {messages && (
-              <table>
+              <table style={{"width":"100%"}}>
                 <tbody>
                   {messages.map((obj, idx) => (
                     <tr key={idx}>
-                      <td>
+                      <td style={{"padding":"5px"}}>
                         <div className="card">
                           <div className="card-container">
                             <h4>
