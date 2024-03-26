@@ -76,10 +76,14 @@ public class PickedMedDataService {
 
     public void approveMedicine(MedDataService.MedDataDTO medDataDTO) {
         // Cancel
-        if (medDataDTO.id() == 0) {
-
+        if ("CANCEL".equalsIgnoreCase(medDataDTO.msg())) {
+            MedDataEntity medDataEntity = medDataRepository.findById(medDataDTO.id()).get();
+            Integer qty = medDataEntity.getMedicine_qty();
+            qty = qty + medDataDTO.medicine_qty();
+            medDataRepository.updateQtyById(medDataEntity.getId(), qty);
         } else {
             Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
+
         }
 
     }
