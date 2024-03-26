@@ -7,6 +7,7 @@ import { Medicine } from "../api/types/medicine";
 import { getMedicines as gm } from "../api/medicines/get-medicines";
 import { search } from "../api/medicines/search-medicines";
 import { deleteMedicine } from "../api/medicines/delete-medicine";
+import message_icon from "../icon/messages.png"
 
 import PickMedicine from "./PickMedicine";
 
@@ -184,7 +185,7 @@ const Home = () => {
                 onClick={() => onMessagesClick()}
               >
                 <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                  src={message_icon}
                   className="nav-img"
                   alt="share"
                 />
