@@ -59,7 +59,8 @@ public class PickedMedDataService {
         List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email);
         List<MedDataService.MedDataDTO> result = new ArrayList<>();
         list.stream().forEach((item) -> {
-            result.add(new MedDataService.MedDataDTO(0, item.getEmail(),
+            result.add(new MedDataService.MedDataDTO(item.getId(),
+                    item.getEmail(),
                     new Date(),
                     item.getMedicine_name(),
                     item.getMedicine_qty(),
