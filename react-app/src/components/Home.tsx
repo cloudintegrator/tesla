@@ -144,7 +144,7 @@ const Home = () => {
               alt="dp"
             />
           </div>
-          <h2>{user?.username}</h2>
+          <h2>{user?.displayName}</h2>
         </div>
       </header>
 
