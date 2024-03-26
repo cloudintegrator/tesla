@@ -136,11 +136,11 @@ const Messages = () => {
             {isLoading && <div className="loader"></div>}
             <h1>Messages</h1>
             {messages && (
-              <table style={{"width":"100%"}}>
+              <table style={{ width: "100%" }}>
                 <tbody>
                   {messages.map((obj, idx) => (
                     <tr key={idx}>
-                      <td style={{"padding":"5px"}}>
+                      <td style={{ padding: "5px" }}>
                         <div className="card">
                           <div className="card-container">
                             <h4>
@@ -152,7 +152,11 @@ const Messages = () => {
                             <h4>
                               <b>Qty: {obj.medicine_qty}</b>
                             </h4>
-                            <p>{obj.msg}</p>
+                            <h4>
+                              <p>{obj.msg}</p>
+                            </h4>
+                            <button className="button">Approve</button>
+                            <button className="button-cancel">Cncel</button>
                           </div>
                         </div>
                       </td>
