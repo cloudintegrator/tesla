@@ -123,6 +123,12 @@ const Home = () => {
   function onLogoutClick() {
     signOut();
   }
+  function onMenuClick() {
+    let navcontainer = document.getElementById(
+      "navcontainer"
+    ) as HTMLDivElement;
+    navcontainer.classList.toggle("navclose");
+  }
   return (
     <>
       <header>
@@ -133,6 +139,7 @@ const Home = () => {
             className="icn menuicn"
             id="menuicn"
             alt="menu-icon"
+            onClick={() => onMenuClick()}
           />
         </div>
         <div className="message">
@@ -149,7 +156,7 @@ const Home = () => {
       </header>
 
       <div className="main-container">
-        <div className="navcontainer">
+        <div id="navcontainer" className="navcontainer">
           <nav className="nav">
             <div className="nav-upper-options">
               <div className="nav-option" onClick={() => onHomeClick()}>

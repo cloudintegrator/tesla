@@ -1,14 +1,14 @@
 import "../dashboard.css";
 import "../App.css";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "@asgardeo/auth-react";
+import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import ShareMedicine from "./ShareMedicine";
 
 const Share = () => {
   const { signOut, state, getBasicUserInfo } = useAuthContext();
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<BasicUserInfo|null>(null);
 
   useEffect(() => {
     console.log("[Share] - Updating Share page...");
@@ -33,6 +33,12 @@ const Share = () => {
   function onLogoutClick() {
     signOut();
   }
+  
+  function onMenuClick() {
+    let navcontainer=document.getElementById("navcontainer") as HTMLDivElement;
+    navcontainer.classList.toggle("navclose");
+  }
+
   return (
     <>
       <header>
@@ -43,6 +49,7 @@ const Share = () => {
             className="icn menuicn"
             id="menuicn"
             alt="menu-icon"
+            onClick={()=>{onMenuClick()}}
           />
         </div>
         <div className="message">
@@ -59,7 +66,7 @@ const Share = () => {
       </header>
 
       <div className="main-container">
-        <div className="navcontainer">
+        <div id="navcontainer" className="navcontainer">
           <nav className="nav">
             <div className="nav-upper-options">
               <div className="nav-option" onClick={() => onHomeClick()}>
