@@ -11,7 +11,7 @@ import PickMedicine from "./PickMedicine";
 import message_icon from "../icon/messages.png";
 import share_icon from "../icon/share.png";
 import home_icon from "../icon/home.png";
-import capsule_icon from "../icon/capsules.png"
+import capsule_icon from "../icon/capsules.png";
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -136,7 +136,7 @@ const Home = () => {
     <>
       <header>
         <div className="logosec">
-        <img
+          <img
             src={capsule_icon}
             className="icn menuicn"
             id="menuicn"

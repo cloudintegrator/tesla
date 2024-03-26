@@ -7,6 +7,7 @@ import ShareMedicine from "./ShareMedicine";
 import message_icon from "../icon/messages.png";
 import share_icon from "../icon/share.png";
 import home_icon from "../icon/home.png";
+import capsule_icon from "../icon/capsules.png";
 
 const Share = () => {
   const { signOut, state, getBasicUserInfo } = useAuthContext();
@@ -48,6 +49,13 @@ const Share = () => {
     <>
       <header>
         <div className="logosec">
+          <img
+            src={capsule_icon}
+            className="icn menuicn"
+            id="menuicn"
+            alt="menu-icon"
+            onClick={() => onMenuClick()}
+          />
           <div className="logo">SHARE MEDICINES</div>
           <img
             src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
