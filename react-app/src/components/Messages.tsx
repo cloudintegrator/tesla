@@ -3,23 +3,35 @@ import "../App.css";
 import { useNavigate } from "react-router-dom";
 import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
-
+import { getMessages } from "../api/medicines/get-messages";
+import { Medicine } from "../api/types/medicine";
 
 const Messages = () => {
-  const { signOut, state, getBasicUserInfo } = useAuthContext();
+  const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
   const navigate = useNavigate();
-  const [user, setUser] = useState<BasicUserInfo|null>(null);
+  const [user, setUser] = useState<BasicUserInfo | null>(null);
+  const [messages, setMessages] = useState<Medicine[]>([]);
 
   useEffect(() => {
-    console.log("[Share] - Updating Share page...");
+    console.log("[Messages] - Updating Share page...");
     if (state.isAuthenticated) {
       console.log("[Share] - User logged in...");
       getBasicUserInfo().then((data) => {
         setUser(data);
-        console.log("[Share] - User logged in...", user?.username);
+        console.log("[Messages] - User logged in...", user?.username);
+        getMessagesForLoggedUser();
       });
     }
   }, []);
+
+  async function getMessagesForLoggedUser() {
+    let token = await getAccessToken();
+    let user= await getBasicUserInfo()
+    getMessages(token, user?.username).then((res) => {
+      setMessages(res.data);
+      console.log(messages);
+    });
+  }
 
   function onHomeClick() {
     navigate("/home");
@@ -27,7 +39,7 @@ const Messages = () => {
   function onShareClick() {
     navigate("/share");
   }
-  function onMessagesClick(){
+  function onMessagesClick() {
     navigate("/messages");
   }
   function onLogoutClick() {

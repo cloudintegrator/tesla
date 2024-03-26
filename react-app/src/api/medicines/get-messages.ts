@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import api from "./instance";
 import { Medicine } from "../types/medicine";
 
-export async function getMessages(accessToken: string,email:string) {
+export async function getMessages(accessToken: string,email:string|undefined) {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
