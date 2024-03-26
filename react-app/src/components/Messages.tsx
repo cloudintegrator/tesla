@@ -129,6 +129,17 @@ const Messages = () => {
           <div className="message-container">
             {isLoading && <div className="loader"></div>}
             <h1>TODO</h1>
+            {messages && (
+              <table>
+                <tbody>
+                  {messages.map((obj,idx)=>(
+                    <tr key={idx}>
+                      <td>{obj.medicine_name}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
       </div>
