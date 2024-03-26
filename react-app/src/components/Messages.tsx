@@ -138,7 +138,7 @@ const Messages = () => {
                         <div className="card">
                           <div className="card-container">
                             <h4>
-                              <b>Requester:{obj.email}</b>
+                              <b>Requester:{obj.send_to}</b>
                             </h4>
                             <h4>
                               <b>Medicine: {obj.medicine_name}</b>
