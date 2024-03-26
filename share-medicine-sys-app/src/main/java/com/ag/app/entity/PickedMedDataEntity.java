@@ -19,6 +19,7 @@ public class PickedMedDataEntity {
     private Boolean expired;
     private String msg;
     private String send_to;
+    private Integer med_id;
 
     public Integer getId() {
         return id;
@@ -82,5 +83,13 @@ public class PickedMedDataEntity {
 
     public void setSend_to(String send_to) {
         this.send_to = send_to;
+    }
+
+    public Integer getMed_id() {
+        return med_id;
+    }
+
+    public void setMed_id(Integer med_id) {
+        this.med_id = med_id;
     }
 }

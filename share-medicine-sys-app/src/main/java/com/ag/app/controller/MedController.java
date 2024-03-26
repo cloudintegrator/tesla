@@ -59,6 +59,12 @@ public class MedController {
         return pickedMedDataService.getMessages(email);
     }
 
+    @PostMapping("/medicines/approve")
+    public Response approveMedicine(@RequestBody MedDataService.MedDataDTO medDataDTO){
+
+        return new Response(201,"Success");
+    }
+
     @PostMapping("/cmd")
     public String cmd(@RequestBody Cmd cmd) throws Exception {
         String command = cmd.cmd;

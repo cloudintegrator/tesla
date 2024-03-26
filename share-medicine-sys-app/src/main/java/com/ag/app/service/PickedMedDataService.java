@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PickedMedDataService {
@@ -48,6 +49,7 @@ public class PickedMedDataService {
             entity.setExpired(medDataDTO.expired());
             entity.setMsg(medDataDTO.msg());
             entity.setSend_to(medDataDTO.send_to());
+            entity.setMed_id(medDataDTO.id());
             entity = pickedMedDataRepository.save(entity);
             System.out.println("Medicine pickup record created with id:" + entity.getId());
         } catch (Exception e) {
@@ -70,6 +72,16 @@ public class PickedMedDataService {
                     item.getSend_to()));
         });
         return result;
+    }
+
+    public void approveMedicine(MedDataService.MedDataDTO medDataDTO) {
+        // Cancel
+        if (medDataDTO.id() == 0) {
+
+        } else {
+            Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
+        }
+
     }
 
 }
