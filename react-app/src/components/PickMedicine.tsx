@@ -2,9 +2,8 @@ import { Medicine } from "../api/types/medicine";
 import { useAuthContext } from "@asgardeo/auth-react";
 import { pickMedicine } from "../api/medicines/pick-medicine";
 
-
-const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
-  const { getAccessToken,getBasicUserInfo } = useAuthContext();
+const PickMedicine = ({ callBackPickMedicine, selectedMed }) => {
+  const { getAccessToken, getBasicUserInfo } = useAuthContext();
 
   async function handleButton(e) {
     console.log(selectedMed);
@@ -17,7 +16,7 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
     let actual_qty = selectedMed?.medicine_qty;
     let msg = msg_field.value;
 
-    const user=await getBasicUserInfo();
+    const user = await getBasicUserInfo();
 
     if (medicine_qty !== 0 && medicine_qty <= actual_qty!) {
       let temp: Medicine = {
@@ -28,13 +27,13 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
         medicine_validity: selectedMed?.medicine_validity,
         expired: selectedMed?.expired,
         msg: msg,
-        send_to: user.username
+        send_to: user.username,
       };
 
       const token = await getAccessToken();
       pickMedicine(token, temp)
         .then((res) => {
-          console.log("[PickMedicine] - Medicine has been picked up.")
+          console.log("[PickMedicine] - Medicine has been picked up.");
         })
         .finally(() => {});
     }
@@ -62,11 +61,12 @@ const PickMedicine = ({callBackPickMedicine,selectedMed}) => {
           style={{ width: "100%", resize: "none" }}
           id="msg"
           name="msg"
+          required
           rows={4}
         />
         <br></br>
         <br></br>
-        <button className="button" id="btnAdd" type="submit" onClick={handleButton} >
+        <button className="button" id="btnAdd" type="submit">
           Add
         </button>
         <button
