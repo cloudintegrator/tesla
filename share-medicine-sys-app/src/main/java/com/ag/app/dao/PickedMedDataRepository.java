@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PickedMedDataRepository extends JpaRepository<PickedMedDataEntity, Integer> {
 
-    @Query(value = "SELECT med FROM PickedMedDataEntity med WHERE med.send_to =?1")
-    List<PickedMedDataEntity> findByEmail(String send_to);
+    @Query(value = "SELECT med FROM PickedMedDataEntity med WHERE med.email =?1")
+    List<PickedMedDataEntity> findByEmail(String email);
 }
