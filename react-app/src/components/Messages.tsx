@@ -11,6 +11,7 @@ const Messages = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<BasicUserInfo | null>(null);
   const [messages, setMessages] = useState<Medicine[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     console.log("[Messages] - Updating Share page...");
@@ -26,11 +27,16 @@ const Messages = () => {
 
   async function getMessagesForLoggedUser() {
     let token = await getAccessToken();
-    let user= await getBasicUserInfo()
-    getMessages(token, user?.username).then((res) => {
-      setMessages(res.data);
-      console.log(messages);
-    });
+    let user = await getBasicUserInfo();
+    setIsLoading(true);
+    getMessages(token, user?.username)
+      .then((res) => {
+        setMessages(res.data);
+        console.log(messages);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }
 
   function onHomeClick() {
@@ -121,6 +127,7 @@ const Messages = () => {
         </div>
         <div className="main">
           <div className="message-container">
+            {isLoading && <div className="loader"></div>}
             <h1>TODO</h1>
           </div>
         </div>
