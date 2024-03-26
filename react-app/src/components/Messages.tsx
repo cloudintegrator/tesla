@@ -30,17 +30,21 @@ const Messages = () => {
   }, []);
 
   async function getMessagesForLoggedUser() {
-    let token = await getAccessToken();
-    let user = await getBasicUserInfo();
-    setIsLoading(true);
-    getMessages(token, user?.username)
-      .then((res) => {
-        setMessages(res.data);
-        console.log(messages);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    if (state.isAuthenticated) {
+      let token = await getAccessToken();
+      let user = await getBasicUserInfo();
+      setIsLoading(true);
+      getMessages(token, user?.username)
+        .then((res) => {
+          setMessages(res.data);
+          console.log(messages);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      navigate("/");
+    }
   }
 
   function onHomeClick() {

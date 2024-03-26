@@ -37,9 +37,9 @@ const Home = () => {
 
   async function getMedicines() {
     let flag = state.isAuthenticated;
-    let accessToken = await getAccessToken();
-    let user = await getBasicUserInfo();
     if (flag) {
+      let accessToken = await getAccessToken();
+      let user = await getBasicUserInfo();
       setIsLoading(true);
       gm(accessToken)
         .then((res) => {
@@ -51,6 +51,8 @@ const Home = () => {
         .catch((e) => {
           getMedicines();
         });
+    } else {
+      navigate("/");
     }
   }
   function populateRows(
@@ -83,33 +85,41 @@ const Home = () => {
   }
 
   async function handleSearchMedicine() {
-    setIsLoading(true);
-    const input_elm = document.getElementById(
-      "search-medicine-name"
-    ) as HTMLInputElement;
-    console.log(input_elm.value);
-    let token = await getAccessToken();
-    search(token, input_elm.value)
-      .then((res) => {
-        let data = res.data;
-        let temp: Medicine[] = populateRows(includeMine, user, data);
-        setMedicines(temp);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-      });
+    if (state.isAuthenticated) {
+      setIsLoading(true);
+      const input_elm = document.getElementById(
+        "search-medicine-name"
+      ) as HTMLInputElement;
+      console.log(input_elm.value);
+      let token = await getAccessToken();
+      search(token, input_elm.value)
+        .then((res) => {
+          let data = res.data;
+          let temp: Medicine[] = populateRows(includeMine, user, data);
+          setMedicines(temp);
+          setIsLoading(false);
+        })
+        .catch(() => {
+          setIsLoading(false);
+        });
+    } else {
+      navigate("/");
+    }
   }
 
   async function handleDeleteMedicine(med) {
-    let token = await getAccessToken();
-    deleteMedicine(token, med)
-      .then(() => {
-        getMedicines();
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (state.isAuthenticated) {
+      let token = await getAccessToken();
+      deleteMedicine(token, med)
+        .then(() => {
+          getMedicines();
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      navigate("/");
+    }
   }
 
   function onHomeClick() {
