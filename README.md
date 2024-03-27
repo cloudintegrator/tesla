@@ -17,3 +17,17 @@ The SHARE-MEDICINE-SYS-APP is working as system API.It's responsible for connect
 
 The SHARE-MEDICINE-SCHEDULED-JOB checks for any expired medicines and updates the expired flag in the MySQL database.
 
+# Usage
+
+### Login
+The application does SSO with Asgardeo. If you don't have an account just register yourself.
+
+### Home 
+In the Home page you can see all the medicines shared by other users. Click the Pick Button to pick your medicine.
+
+Also, you can Search for medicine and you can Delete your shared medicines.
+
+
+### Messages
+In this page, you receive the messages sent my anyone who picked the medicines shared by you.
+
