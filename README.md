@@ -6,7 +6,8 @@ the medicines.
 SPA Application: https://cbf4bd14-4706-4786-8ae3-67cd680b4909.e1-us-east-azure.choreoapps.dev
 
 # Architecture
-I have used the API Led Connectivity approach in the application. 
+I have used the API Led Connectivity approach in the application.
+![](https://github.com/cloudintegrator/tesla/blob/main/docs/share-medicine.jpeg) 
 
 ### Experience Layer
 The SHARE-MEDICINE-EXP-APP is working as an experience API for the integration and it's endpoints are exposed as Public endpoint to be consumed.The service is implemented using Ballerina.
