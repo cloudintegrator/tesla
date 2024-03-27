@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PickedMedDataService {
@@ -98,8 +99,8 @@ public class PickedMedDataService {
             qty = qty + medDataDTO.medicine_qty();
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
         } else {
-            PickedMedDataEntity entity = pickedMedDataRepository.findByEmailAndMed(medDataDTO.email(), medDataDTO.id());
-            pickedMedDataRepository.updateDeal(entity.getId(), true);
+            Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
+            pickedMedDataRepository.updateDeal(entity.get().getId(), true);
         }
 
     }
