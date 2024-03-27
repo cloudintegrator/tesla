@@ -22,7 +22,7 @@ public class PickedMedDataService {
     private MedDataRepository medDataRepository;
 
     @RabbitListener(queues = "PICK.MEDICINE.QUEUE")
-    public void handleMessage(final MedDataService.MedDataDTO medDataDTO) {
+    public void handlePickMessage(final MedDataService.MedDataDTO medDataDTO) {
         try {
             save(medDataDTO);
         } catch (Exception e) {
@@ -30,6 +30,14 @@ public class PickedMedDataService {
         }
     }
 
+    @RabbitListener(queues = "APPROVE.MEDICINE.QUEUE")
+    public void handleApproveMedicine(final MedDataService.MedDataDTO medDataDTO) {
+        try {
+            approveMedicine(medDataDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public void save(MedDataService.MedDataDTO medDataDTO) {
         try {
@@ -66,7 +74,7 @@ public class PickedMedDataService {
     }
 
     public List<MedDataService.MedDataDTO> getMessages(String email) {
-        List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email,false);
+        List<PickedMedDataEntity> list = pickedMedDataRepository.findByEmail(email, false);
         List<MedDataService.MedDataDTO> result = new ArrayList<>();
         list.stream().forEach((item) -> {
             result.add(new MedDataService.MedDataDTO(item.getId(),
