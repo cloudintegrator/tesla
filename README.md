@@ -26,10 +26,17 @@ The application does SSO with Asgardeo. If you don't have an account just regist
 
 ### Home 
 In the Home page you can see all the medicines shared by other users. Click the Pick Button to pick your medicine.
+![](https://github.com/cloudintegrator/tesla/blob/main/docs/home.png)
 
 Also, you can Search for medicine and you can Delete your shared medicines.
+![](https://github.com/cloudintegrator/tesla/blob/main/docs/pick.png)
 
+### Share
+Here you can add information of the medicine you wish to share.
+![](https://github.com/cloudintegrator/tesla/blob/main/docs/share.png)
 
 ### Messages
 In this page, you receive the messages sent my anyone who picked the medicines shared by you.
+![](https://github.com/cloudintegrator/tesla/blob/main/docs/approve.png)
 
+You can approve or cancel the request also.
