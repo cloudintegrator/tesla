@@ -84,14 +84,18 @@ public class PickedMedDataService {
     }
 
     public void approveMedicine(MedDataService.MedDataDTO medDataDTO) {
+        Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
         // Cancel
         if ("CANCEL".equalsIgnoreCase(medDataDTO.msg())) {
-            MedDataEntity medDataEntity = medDataRepository.findById(medDataDTO.id()).get();
+            // Re-establish the original qty.
+            MedDataEntity medDataEntity = medDataRepository.findById(entity.get().getMed_id()).get();
             Integer qty = medDataEntity.getMedicine_qty();
             qty = qty + medDataDTO.medicine_qty();
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
+
+            // Delete the picked medicine.
+            medDataRepository.deleteById(medDataDTO.id());
         } else {
-            Optional<PickedMedDataEntity> entity = pickedMedDataRepository.findById(medDataDTO.id());
             pickedMedDataRepository.updateDeal(entity.get().getId(), true);
         }
 
