@@ -123,7 +123,7 @@ service / on new http:Listener(9090) {
         return r;
     }
 
-     resource function get messages(string token,string email) returns Medicine[]|error{
+    resource function get messages(string token,string email) returns Medicine[]|error{
         string path= SYS_APP_BASEPATH + "/medicines/messages";
         string params="email="+email;
         string fullPath=path+"?"+params;
@@ -138,6 +138,21 @@ service / on new http:Listener(9090) {
         Medicine[] med=check httpClient-> get(fullPath,headers);
         log:printInfo("********** MESSAGES **********"+med.toJsonString());
         return med;
+    }
+
+    resource function post approve(Medicine medicine) returns Response|error{
+        check self.mqClient->publishMessage({
+            content: medicine,
+            routingKey: "APPROVE.MEDICINE.QUEUE"
+        });
+
+        log:printInfo("********** Medicine information posted successfully for approval **********");
+       
+        Response r={
+            code: 201,
+            message: "Success"
+        };
+        return r;
     }
 
 }
