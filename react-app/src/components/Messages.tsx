@@ -5,6 +5,7 @@ import { BasicUserInfo, useAuthContext } from "@asgardeo/auth-react";
 import { useEffect, useState } from "react";
 import { getMessages } from "../api/medicines/get-messages";
 import { Medicine } from "../api/types/medicine";
+import { approveMedicine } from "../api/medicines/approve-medicine";
 import message_icon from "../icon/messages.png";
 import share_icon from "../icon/share.png";
 import home_icon from "../icon/home.png";
@@ -44,6 +45,25 @@ const Messages = () => {
         });
     } else {
       navigate("/");
+    }
+  }
+
+  async function handleApprove(obj: Medicine) {
+    if (state.isAuthenticated) {
+      let token = await getAccessToken();
+      approveMedicine(token, obj).then(() => {
+        getMessagesForLoggedUser();
+      });
+    }
+  }
+
+  async function handleCancel(obj: Medicine) {
+    if (state.isAuthenticated) {
+      let token = await getAccessToken();
+      obj.msg = "CANCEL";
+      approveMedicine(token, obj).then(() => {
+        getMessagesForLoggedUser();
+      });
     }
   }
 
@@ -159,8 +179,18 @@ const Messages = () => {
                             <h4>
                               <p>{obj.msg}</p>
                             </h4>
-                            <button className="button">Approve</button>
-                            <button className="button-cancel">Cncel</button>
+                            <button
+                              className="button"
+                              onClick={() => handleApprove(obj)}
+                            >
+                              Approve
+                            </button>
+                            <button
+                              className="button-cancel"
+                              onClick={() => handleCancel(obj)}
+                            >
+                              Cancel
+                            </button>
                           </div>
                         </div>
                       </td>
