@@ -61,7 +61,7 @@ const PickMedicine = ({ callBackPickMedicine, selectedMed }) => {
           style={{ width: "100%", resize: "none" }}
           id="msg"
           name="msg"
-          defaultValue="Write a message with your address."
+          defaultValue="Write a message with your contact number so that donor can contact you."
           required
           rows={4}
         />
