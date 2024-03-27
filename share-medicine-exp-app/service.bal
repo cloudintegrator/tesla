@@ -1,8 +1,8 @@
 import ballerina/http;
 import ballerinax/rabbitmq;
 import ballerina/log;
-import ballerinax/mysql.driver as _;
-import ballerinax/mysql;
+// import ballerinax/mysql.driver as _;
+// import ballerinax/mysql;
 
 
 public type Medicine record{|
@@ -166,16 +166,16 @@ service / on new http:Listener(9090) {
         return r;
     }
 
-    resource function get expired_meds() returns Medicine[]|error{
-        final mysql:Client dbClient = check new(host=HOST, user=USER, password=PASSWORD, port=PORT, database=DATABASE);
-        Medicine[] data=[];
-        stream<Medicine,error?> result=dbClient->query(`SELECT * FROM med_data`);
-        check from Medicine m in result
-            do {
-                data.push(m);
-            };
+    // resource function get expired_meds() returns Medicine[]|error{
+    //     final mysql:Client dbClient = check new(host=HOST, user=USER, password=PASSWORD, port=PORT, database=DATABASE);
+    //     Medicine[] data=[];
+    //     stream<Medicine,error?> result=dbClient->query(`SELECT * FROM med_data`);
+    //     check from Medicine m in result
+    //         do {
+    //             data.push(m);
+    //         };
         
-        return data;
-    }
+    //     return data;
+    // }
 
 }
