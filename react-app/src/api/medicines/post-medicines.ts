@@ -6,9 +6,13 @@ export async function postMedicine(accessToken: string, payload: Medicine) {
     Authorization: `Bearer ${accessToken}`,
   };
   console.log(payload);
-  const response = await api.post("/medicines", payload, {
-    headers: headers
-  });
+  const response = await api
+    .post("/medicines", payload, {
+      headers: headers,
+    })
+    .catch((e) => {
+      console.log(e);
+    });
   console.log(response);
   return response;
 }
