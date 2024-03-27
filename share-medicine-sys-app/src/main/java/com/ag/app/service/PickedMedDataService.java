@@ -94,7 +94,7 @@ public class PickedMedDataService {
             medDataRepository.updateQtyById(medDataEntity.getId(), qty);
 
             // Delete the picked medicine.
-            medDataRepository.deleteById(medDataDTO.id());
+            pickedMedDataRepository.deleteById(medDataDTO.id());
         } else {
             pickedMedDataRepository.updateDeal(entity.get().getId(), true);
         }
