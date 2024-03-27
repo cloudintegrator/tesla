@@ -1,6 +1,9 @@
 import ballerina/http;
 import ballerinax/rabbitmq;
 import ballerina/log;
+import ballerinax/mysql.driver as _;
+import ballerinax/mysql;
+
 
 public type Medicine record{|
     int id?;
@@ -28,6 +31,14 @@ int MQ_PORT=5672;
 string MQ_USERNAME="aannimrm";
 string MQ_PASSWORD="B40g83-bYXRfan3MSsyi1DuQzvH_Nves";
 string MQ_VHOST="aannimrm";
+
+
+
+configurable string USER = ?;
+configurable string PASSWORD = ?;
+configurable string HOST = ?;
+configurable int PORT = ?;
+configurable string DATABASE = ?;
 
 service / on new http:Listener(9090) {
     private final rabbitmq:ConnectionConfiguration connectionConfig;
@@ -153,6 +164,18 @@ service / on new http:Listener(9090) {
             message: "Success"
         };
         return r;
+    }
+
+    resource function get expired_meds() returns Medicine[]|error{
+        final mysql:Client dbClient = check new(host=HOST, user=USER, password=PASSWORD, port=PORT, database=DATABASE);
+        Medicine[] data=[];
+        stream<Medicine,error?> result=dbClient->query(`SELECT * FROM med_data`);
+        check from Medicine m in result
+            do {
+                data.push(m);
+            };
+        
+        return data;
     }
 
 }
