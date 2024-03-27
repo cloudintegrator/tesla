@@ -42,27 +42,19 @@ public class PickedMedDataService {
 
     public void save(MedDataService.MedDataDTO medDataDTO) {
         try {
-            // Check if exists:
-            PickedMedDataEntity entity = null;
-            entity = pickedMedDataRepository.findByEmailAndMed(medDataDTO.email(), medDataDTO.id());
-            if (null != entity) {
-                Integer temp = entity.getMedicine_qty() + medDataDTO.medicine_qty();
-                pickedMedDataRepository.updateQtyMsg(entity.getId(), temp, medDataDTO.msg());
-            } else {
-                // Save the picked medicine data.
-                entity = new PickedMedDataEntity();
-                entity.setEmail(medDataDTO.email());
-                entity.setMedicine_name(medDataDTO.medicine_name());
-                entity.setMedicine_qty(medDataDTO.medicine_qty());
-                entity.setMedicine_validity(medDataDTO.medicine_validity());
-                entity.setExpired(medDataDTO.expired());
-                entity.setMsg(medDataDTO.msg());
-                entity.setSend_to(medDataDTO.send_to());
-                entity.setMed_id(medDataDTO.id());
-                entity.setDeal(false);
-                entity = pickedMedDataRepository.save(entity);
-                System.out.println("Medicine pickup record created with id:" + entity.getId());
-            }
+            // Save the picked medicine.
+            PickedMedDataEntity entity = new PickedMedDataEntity();
+            entity.setEmail(medDataDTO.email());
+            entity.setMedicine_name(medDataDTO.medicine_name());
+            entity.setMedicine_qty(medDataDTO.medicine_qty());
+            entity.setMedicine_validity(medDataDTO.medicine_validity());
+            entity.setExpired(medDataDTO.expired());
+            entity.setMsg(medDataDTO.msg());
+            entity.setSend_to(medDataDTO.send_to());
+            entity.setMed_id(medDataDTO.id());
+            entity.setDeal(false);
+            entity = pickedMedDataRepository.save(entity);
+            System.out.println("Medicine pickup record created with id:" + entity.getId());
 
             // Deduct qty.
             MedDataEntity medDataEntity = medDataRepository.findById(medDataDTO.id()).get();
