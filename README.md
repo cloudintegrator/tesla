@@ -3,6 +3,7 @@ Share Medicine is a SPA for sharing your extra medicines with anyone in need. Th
 as we buy many medicines that we don't even use and they get expired. Using this application we can share 
 the medicines.
 
+SPA Application: https://cbf4bd14-4706-4786-8ae3-67cd680b4909.e1-us-east-azure.choreoapps.dev
 
 # Architecture
 I have used the API Led Connectivity approach in the application. 
