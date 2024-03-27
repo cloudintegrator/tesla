@@ -6,8 +6,3 @@ endpoints:
     type: REST
     networkVisibility: Public
     context: /
-  - name: private
-    port: 8080
-    type: REST
-    networkVisibility: Public
-    context: /
