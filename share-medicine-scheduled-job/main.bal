@@ -1,8 +1,8 @@
 import ballerina/io;
 import ballerina/http;
 
-const string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod-internal.e1-us-east-azure.internal.choreoapis.dev/bjcz/sharemedicinesysapp/private-5c6/v1.0";
-// const string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev/bjcz/sharemedicinesysapp/public-5c6/v1.0";
+// const string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod-internal.e1-us-east-azure.internal.choreoapis.dev/bjcz/sharemedicinesysapp/private-5c6/v1.0";
+const string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev/bjcz/sharemedicinesysapp/public-5c6/v1.0";
 
 
 const string ASGARDEO_HOST="https://api.asgardeo.io/t/demoltda/oauth2";
