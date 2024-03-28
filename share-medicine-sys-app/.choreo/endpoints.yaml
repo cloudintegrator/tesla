@@ -1,7 +1,7 @@
 # +required Version of the endpoint configuration YAML
 version: 0.1
 endpoints:
-  - name: endpoint
+  - name: public
     port: 8080
     type: REST
     networkVisibility: Public
