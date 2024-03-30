@@ -12,6 +12,7 @@ import message_icon from "../icon/messages.png";
 import share_icon from "../icon/share.png";
 import home_icon from "../icon/home.png";
 import capsule_icon from "../icon/capsules.png";
+import logout_icon from "../icon/logout.png"
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -203,7 +204,7 @@ const Home = () => {
                 onClick={() => onLogoutClick()}
               >
                 <img
-                  src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                  src={logout_icon}
                   className="nav-img"
                   alt="logout"
                 />
