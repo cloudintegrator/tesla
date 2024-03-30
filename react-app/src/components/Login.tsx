@@ -28,7 +28,7 @@ const Login = ({ callBackLogin }) => {
     <div>
       <header className="App-header">
         <h1>
-          <p>Share surplus meds, spread wellness.</p>
+          <p>Share surplus meds, spread wellness</p>
         </h1>
         <br></br>
         <h3>
