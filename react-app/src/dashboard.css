@@ -71,7 +71,7 @@ header {
   width: 500px;
   height: 42px;
   border-radius: 50px 0 0 50px;
-  background-color: var(--background-color3);
+  background-color: #ffffff;
   padding: 0 20px;
   font-size: 15px;
   outline: none;
@@ -84,7 +84,7 @@ header {
   align-items: center;
   justify-content: center;
   border-radius: 0px 50px 50px 0px;
-  background-color: var(--secondary-color);
+  background-color: #ffffff;
   cursor: pointer;
 }
 

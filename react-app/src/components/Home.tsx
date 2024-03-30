@@ -217,10 +217,10 @@ const Home = () => {
         <div className="main">
           <div className="searchbar">
             <input id="search-medicine-name" type="text" placeholder="Search" />
-            <div className="" onClick={handleSearchMedicine}>
+            <div className="searchbtn" onClick={handleSearchMedicine}>
               <img
                 src={search_icon}
-                className="icn"
+                className="icn srchicn"
                 alt="search-icon"
               />
             </div>
