@@ -172,7 +172,7 @@ const Home = () => {
               alt="dp"
             />
           </div>
-          <h1>{user?.displayName}</h1>
+          <h4>{user?.displayName}</h4>
         </div>
       </header>
 
@@ -248,7 +248,7 @@ const Home = () => {
                     <th>MEDICINE NAME</th>
                     <th>QUANTITY</th>
                     <th>VALIDITY</th>
-                    <th>GET IT?</th>
+                    <th>GET IT</th>
                   </tr>
                 </thead>
                 <tbody>
