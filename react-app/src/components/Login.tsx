@@ -32,9 +32,9 @@ const Login = ({ callBackLogin }) => {
         </h1>
         <br></br>
         <h3>
-          <a href="https://github.com/cloudintegrator/tesla/blob/main/README.md">
+          {/* <a href="https://github.com/cloudintegrator/tesla/blob/main/README.md">
             About
-          </a>
+          </a> */}
         </h3>
         <img src={logo} className="App-logo" alt="logo" />
         <button className="pill-btn" onClick={handleSignIn}>
