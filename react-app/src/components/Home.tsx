@@ -13,6 +13,7 @@ import share_icon from "../icon/share.png";
 import home_icon from "../icon/home.png";
 import capsule_icon from "../icon/capsules.png";
 import logout_icon from "../icon/logout.png"
+import search_icon from "../icon/search.png"
 
 const Home = () => {
   const { signOut, state, getBasicUserInfo, getAccessToken } = useAuthContext();
@@ -216,10 +217,10 @@ const Home = () => {
         <div className="main">
           <div className="searchbar">
             <input id="search-medicine-name" type="text" placeholder="Search" />
-            <div className="searchbtn" onClick={handleSearchMedicine}>
+            <div className="" onClick={handleSearchMedicine}>
               <img
-                src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-                className="icn srchicn"
+                src={search_icon}
+                className="icn"
                 alt="search-icon"
               />
             </div>
