@@ -46,4 +46,4 @@ Here you can add information of the medicine you wish to share.
 In this page, you receive the messages sent my anyone who picked the medicines shared by you.
 ![](https://github.com/cloudintegrator/tesla/blob/main/docs/approve.png)
 
-You can approve or cancel the request also.
+You can approve or cancel the request also clicking the buttons.
