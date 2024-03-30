@@ -150,7 +150,7 @@ header {
   gap: 50px;
 }
 .nav {
-  min-height: 91vh;
+  min-height: 100%;
   width: 250px;
   background-color: var(--background-color2);
   position: absolute;
