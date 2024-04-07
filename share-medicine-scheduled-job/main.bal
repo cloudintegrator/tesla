@@ -1,9 +1,12 @@
 import ballerina/io;
 import ballerina/http;
+import ballerina/oauth2;
+ 
+
 
 const string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod-internal.e1-us-east-azure.internal.choreoapis.dev/bjcz/sharemedicinesysapp/private-5c6/v1.0";
 
-const string ASGARDEO_HOST="https://sts.choreo.dev/oauth2";
+const string STS_HOST="https://sts.choreo.dev/oauth2/token";
 const string CONSUMER_KEY="rDOKLZWb1cbbeMehSlWuo5_irkca";
 const string CONSUMER_SECRET="B1F1WH6jY_rRJ3YkHOeiLf2CX54a";
 
@@ -19,19 +22,14 @@ public function main() returns error? {
 }
 
 public function updateExpiredMedicines() returns error? {
-    // Get a token.
-    http:Client httpClient = check new (ASGARDEO_HOST);
-    http:Response response = check httpClient -> post("/token",
-                            {"grant_type":"client_credentials"},
-                            {"client_id": CONSUMER_KEY},
-                            {"client_secret":CONSUMER_SECRET});
-    json jsonResponse = check response.getJsonPayload();    
-    Token  result = check jsonResponse.fromJsonWithType(Token);
-
-    // Trigger the SYS APP.
-    string token=result.access_token;
+    oauth2:ClientOAuth2Provider provider = new({
+                        tokenUrl: STS_HOST,
+                        clientId: CONSUMER_KEY,
+                        clientSecret: CONSUMER_SECRET});
+    string token = check provider.generateToken();
+    io:println(token);         
     error? e=trigger(token);
-    io:println(e);                 
+    io:println(e);         
 }
 public function trigger(string token) returns error? {
     io:println(token);
