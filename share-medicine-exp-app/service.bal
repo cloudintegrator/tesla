@@ -1,8 +1,7 @@
 import ballerina/http;
 import ballerinax/rabbitmq;
 import ballerina/log;
-// import ballerinax/mysql.driver as _;
-// import ballerinax/mysql;
+
 
 
 public type Medicine record{|
@@ -22,8 +21,13 @@ public type Response record{
     string message;
 };
 
-string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev";
-string SYS_APP_BASEPATH="/bjcz/sharemedicinesysapp/public-5c6/v1.0";
+// Public Endpoint
+// string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-prod.e1-us-east-azure.choreoapis.dev";
+// string SYS_APP_BASEPATH="/bjcz/sharemedicinesysapp/public-5c6/v1.0";
+
+// Private Endpoint
+string SYS_APP_HOST="https://c219fb60-f3b7-4aca-a7d2-d62a3e1f1a5d-dev-internal.e1-us-east-azure.internal.choreoapis.dev";
+string SYS_APP_BASEPATH="/bjcz/sharemedicinesysapp/private-5c6/v1.0";
 
 
 string MQ_HOST="fish-01.rmq.cloudamqp.com";
@@ -33,12 +37,6 @@ string MQ_PASSWORD="B40g83-bYXRfan3MSsyi1DuQzvH_Nves";
 string MQ_VHOST="aannimrm";
 
 
-
-configurable string USER = ?;
-configurable string PASSWORD = ?;
-configurable string HOST = ?;
-configurable int PORT = ?;
-configurable string DATABASE = ?;
 
 service / on new http:Listener(9090) {
     private final rabbitmq:ConnectionConfiguration connectionConfig;
@@ -165,17 +163,5 @@ service / on new http:Listener(9090) {
         };
         return r;
     }
-
-    // resource function get expired_meds() returns Medicine[]|error{
-    //     final mysql:Client dbClient = check new(host=HOST, user=USER, password=PASSWORD, port=PORT, database=DATABASE);
-    //     Medicine[] data=[];
-    //     stream<Medicine,error?> result=dbClient->query(`SELECT * FROM med_data`);
-    //     check from Medicine m in result
-    //         do {
-    //             data.push(m);
-    //         };
-        
-    //     return data;
-    // }
 
 }
